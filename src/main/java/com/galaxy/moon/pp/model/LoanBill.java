@@ -14,11 +14,9 @@ public class LoanBill {
     private Long productId;   // 关联的产品Id
     private Long loanAmount;
     private BigDecimal expectRate; // 预期的利率
-    private Integer loadType;  // 借款类型，与产品类型不同
+    private Integer loanType;  // 借款类型，与产品类型不同
     private Integer duration;  // 借款时长
-
-    //其他一些信息， 比如房产证的照片信息，
-    private List<String> ownerCertificates;
+    private Long asssetId; // 资产Id
 
     private Long createTime;
     private Integer status; // 待审核， 审核中， 已通过， 已拒绝
@@ -27,6 +25,14 @@ public class LoanBill {
 
 
     public LoanBill() {
+    }
+
+    public Long getAsssetId() {
+        return asssetId;
+    }
+
+    public void setAsssetId(Long asssetId) {
+        this.asssetId = asssetId;
     }
 
     public Integer getDuration() {
@@ -85,20 +91,12 @@ public class LoanBill {
         this.expectRate = expectRate;
     }
 
-    public Integer getLoadType() {
-        return loadType;
+    public Integer getLoanType() {
+        return loanType;
     }
 
-    public void setLoadType(Integer loadType) {
-        this.loadType = loadType;
-    }
-
-    public List<String> getOwnerCertificates() {
-        return ownerCertificates;
-    }
-
-    public void setOwnerCertificates(List<String> ownerCertificates) {
-        this.ownerCertificates = ownerCertificates;
+    public void setLoanType(Integer loanType) {
+        this.loanType = loanType;
     }
 
     public Long getCreateTime() {

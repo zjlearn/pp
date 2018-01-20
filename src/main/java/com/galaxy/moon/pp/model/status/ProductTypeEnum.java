@@ -4,8 +4,8 @@ package com.galaxy.moon.pp.model.status;
  * create by zhangjun1 on 2018/1/20
  */
 public enum ProductTypeEnum {
-    CAR_LOAN(1, "车贷"),
-    Mortgage(2, "房贷"),
+    Mortgage(1, "房贷"),
+    CAR_LOAN(2, "车贷"),
     BUSINESS_LOAN(4, "企业贷");
 
     private final int  value;

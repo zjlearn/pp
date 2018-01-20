@@ -1,11 +1,16 @@
 package com.galaxy.moon.pp.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
+import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.vo.RegisterUserVO;
+import com.galaxy.moon.pp.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -19,15 +24,15 @@ import java.security.SecureRandom;
 @RequestMapping("/xhr/user")
 public class UserController {
 
-    @RequestMapping("/hello")
-    public String hello() {
-        System.out.println("进入hello");
-        return "hello， 5465";
-    }
+    @Autowired
+    UserService userService;
+
 
     @RequestMapping("/register")
-    public Result register(@RequestParam("mobileNo") String mobileNo, @RequestParam("userName") String userName,
-                           @RequestParam("password") String password, @RequestParam("inviteCode") String inviteCode) {
+    public Result register(@RequestBody RegisterUserVO registerUserVO) {
+        System.out.println(registerUserVO);
+        User u= registerUserVO.toUser();
+        userService.addUser(u);
         return ResultGenerator.genSuccessResult();
     }
 

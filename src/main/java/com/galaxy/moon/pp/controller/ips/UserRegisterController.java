@@ -1,10 +1,11 @@
-package com.galaxy.moon.pp.controller;
+package com.galaxy.moon.pp.controller.ips;
 
 import com.alibaba.fastjson.JSONObject;
-import com.galaxy.moon.pp.model.IPSRequestParam;
+import com.galaxy.moon.pp.model.IpsRequestParam;
 import com.galaxy.moon.pp.model.dto.UserRegisterDTO;
 import com.galaxy.moon.pp.util.IPSOperationTypeEnum;
 import com.galaxy.moon.pp.util.IPSRSACryptoUtil;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,10 @@ import java.util.UUID;
 public class UserRegisterController {
 
     @RequestMapping("sign")
-    public JSONObject sign(@RequestParam("realName") String realName,
-                           @RequestParam("idCard") String idCard){
+    public JSONObject sign(@RequestBody JSONObject jsonObject) {
+        String realName = jsonObject.getString("realName");
+        String idCard = jsonObject.getString("idCard");
+
         String Id = UUID.randomUUID().toString();
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setMerBillNo("23235413");
@@ -30,21 +33,26 @@ public class UserRegisterController {
         userRegisterDTO.setUserType("1");
         userRegisterDTO.setUserRole("1");
         userRegisterDTO.setRealName(realName);
-        userRegisterDTO.setMobileNo("13016413998");
+        userRegisterDTO.setMobileNo("15669059986");
         userRegisterDTO.setBizType("1");
         userRegisterDTO.setEnterName("");
         userRegisterDTO.setIsAssureCom("1");
         userRegisterDTO.setWebUrl("http://127.0.0.1:8080/p2p-dep/test/p2pweb.html");
         userRegisterDTO.setS2SUrl("http://127.0.0.1:8080/p2p-dep/test/p2pweb.html");
         userRegisterDTO.setIdentNo(idCard);
-        String reqStr= JSONObject.toJSONString(userRegisterDTO);
-        JSONObject result =  IPSRSACryptoUtil.genReqData(IPSRequestParam.merchantID, IPSOperationTypeEnum.USER_REGISTER.getName(), reqStr);
+        String reqStr = JSONObject.toJSONString(userRegisterDTO);
+        JSONObject result = IPSRSACryptoUtil.genReqData(IpsRequestParam.merchantID, IPSOperationTypeEnum.USER_REGISTER.getName(), reqStr);
         System.out.println(result);
-        return new JSONObject();
+        return result;
     }
 
-    @RequestMapping("notice")
-    public JSONObject notice(){
-        return new JSONObject();
+    @RequestMapping("/s2s")
+    public String notice(@RequestParam("resultCode") String resultCode,
+                         @RequestParam("resultMsg") String resultMsg,
+                         @RequestParam("merchantID") String merchantID,
+                         @RequestParam("sign") String sign,
+                         @RequestParam("response") String response) {
+        System.out.println(response);
+        return IpsRequestParam.scuessCode;
     }
 }

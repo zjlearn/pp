@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.galaxy.moon.pp.dao.UserMapper" >
+  
+  <sql id="Base_Column_List" >
+    id, userName, nickName, mobile, emial, password, salt, sex, idCard, age, birthPlace, 
+    marryStatus, userType, ipsAccount, redPacketNum, availableRemain, frozenRemain, status, 
+    createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultType="com.galaxy.moon.pp.model.User" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.galaxy.moon.pp.model.User" >
+    insert into tb_user (id, userName, nickName, 
+      mobile, emial, password, 
+      salt, sex, idCard, 
+      age, birthPlace, marryStatus, 
+      userType, ipsAccount, redPacketNum, 
+      availableRemain, frozenRemain, status, 
+      createTime, updateTime)
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{emial,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{idCard,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{birthPlace,jdbcType=VARCHAR}, #{marryStatus,jdbcType=TINYINT}, 
+      #{userType,jdbcType=TINYINT}, #{ipsAccount,jdbcType=VARCHAR}, #{redPacketNum,jdbcType=INTEGER}, 
+      #{availableRemain,jdbcType=DECIMAL}, #{frozenRemain,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.User" >
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        userName,
+      </if>
+      <if test="nickName != null" >
+        nickName,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="emial != null" >
+        emial,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="idCard != null" >
+        idCard,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="birthPlace != null" >
+        birthPlace,
+      </if>
+      <if test="marryStatus != null" >
+        marryStatus,
+      </if>
+      <if test="userType != null" >
+        userType,
+      </if>
+      <if test="ipsAccount != null" >
+        ipsAccount,
+      </if>
+      <if test="redPacketNum != null" >
+        redPacketNum,
+      </if>
+      <if test="availableRemain != null" >
+        availableRemain,
+      </if>
+      <if test="frozenRemain != null" >
+        frozenRemain,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="emial != null" >
+        #{emial,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthPlace != null" >
+        #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="marryStatus != null" >
+        #{marryStatus,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="ipsAccount != null" >
+        #{ipsAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="redPacketNum != null" >
+        #{redPacketNum,jdbcType=INTEGER},
+      </if>
+      <if test="availableRemain != null" >
+        #{availableRemain,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenRemain != null" >
+        #{frozenRemain,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.User" >
+    update tb_user
+    <set >
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nickName = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="emial != null" >
+        emial = #{emial,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="idCard != null" >
+        idCard = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthPlace != null" >
+        birthPlace = #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="marryStatus != null" >
+        marryStatus = #{marryStatus,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null" >
+        userType = #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="ipsAccount != null" >
+        ipsAccount = #{ipsAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="redPacketNum != null" >
+        redPacketNum = #{redPacketNum,jdbcType=INTEGER},
+      </if>
+      <if test="availableRemain != null" >
+        availableRemain = #{availableRemain,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenRemain != null" >
+        frozenRemain = #{frozenRemain,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.User" >
+    update tb_user
+    set userName = #{userName,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      emial = #{emial,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      idCard = #{idCard,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      birthPlace = #{birthPlace,jdbcType=VARCHAR},
+      marryStatus = #{marryStatus,jdbcType=TINYINT},
+      userType = #{userType,jdbcType=TINYINT},
+      ipsAccount = #{ipsAccount,jdbcType=VARCHAR},
+      redPacketNum = #{redPacketNum,jdbcType=INTEGER},
+      availableRemain = #{availableRemain,jdbcType=DECIMAL},
+      frozenRemain = #{frozenRemain,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=BIGINT},
+      updateTime = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
