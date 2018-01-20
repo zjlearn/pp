@@ -3,14 +3,14 @@ package com.galaxy.moon.pp.model;
 /**
  * create by zhangjun1 on 2017/12/20
  */
-public enum ProductType {
+public enum ProductTypeEnum {
 
     SHORT(1, "短期");
 
     private int value;
     private  String desc;
 
-    ProductType(int value, String desc) {
+    ProductTypeEnum(int value, String desc) {
         this.value = value;
         this.desc = desc;
     }

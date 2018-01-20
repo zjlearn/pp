@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
 import com.galaxy.moon.pp.model.IpsResponse;
-import com.galaxy.moon.pp.model.ModelParam;
+import com.galaxy.moon.pp.model.IPSRequestParam;
 import com.galaxy.moon.pp.model.dto.FreezeDTO;
 import com.galaxy.moon.pp.util.IPSHttpUtil;
 import com.galaxy.moon.pp.util.IPSOperationTypeEnum;
@@ -25,7 +25,7 @@ public class TradeFreezeController {
 
     @RequestMapping("/tradeFreeze")
     public Result tradeFreeze(@RequestBody FreezeDTO freezeDTO) {
-        IpsResponse result = ipsHttpUtil.post(ModelParam.merchantID, IPSOperationTypeEnum.TRADE_FREEZE.getName(),
+        IpsResponse result = ipsHttpUtil.post(IPSRequestParam.merchantID, IPSOperationTypeEnum.TRADE_FREEZE.getName(),
                 JSON.toJSONString(freezeDTO));
         return ResultGenerator.genSuccessResult();
     }

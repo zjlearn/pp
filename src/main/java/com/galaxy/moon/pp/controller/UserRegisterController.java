@@ -1,7 +1,7 @@
 package com.galaxy.moon.pp.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.galaxy.moon.pp.model.ModelParam;
+import com.galaxy.moon.pp.model.IPSRequestParam;
 import com.galaxy.moon.pp.model.dto.UserRegisterDTO;
 import com.galaxy.moon.pp.util.IPSOperationTypeEnum;
 import com.galaxy.moon.pp.util.IPSRSACryptoUtil;
@@ -38,7 +38,7 @@ public class UserRegisterController {
         userRegisterDTO.setS2SUrl("http://127.0.0.1:8080/p2p-dep/test/p2pweb.html");
         userRegisterDTO.setIdentNo(idCard);
         String reqStr= JSONObject.toJSONString(userRegisterDTO);
-        JSONObject result =  IPSRSACryptoUtil.genReqData(ModelParam.merchantID, IPSOperationTypeEnum.USER_REGISTER.getName(), reqStr);
+        JSONObject result =  IPSRSACryptoUtil.genReqData(IPSRequestParam.merchantID, IPSOperationTypeEnum.USER_REGISTER.getName(), reqStr);
         System.out.println(result);
         return new JSONObject();
     }

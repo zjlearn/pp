@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false" scan="false" scanPeriod="60 seconds">
-    <contextName>ark-web</contextName>
+    <contextName>moon-pp</contextName>
 
-    <property name="logging.path" value="/home/logs/pp-web"/>
+    <property name="logging.path" value="/home/logs/moon-pp"/>
     <property name="log.level" value="info"/>
     <property name="log.maxHistory" value="60"/>
     <property name="log.maxSize" value="50MB"/>
 
+
+    <!-- 控制台日志appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%c] %m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
     <appender name="defaultAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logging.path}/default.log</file>
@@ -36,7 +44,7 @@
 
     <!-- Root Logger -->
     <root level="${log.level}">
-        
+        <appender-ref ref="STDOUT" />
         <appender-ref ref="defaultAppender_ASYNC"/>
     </root>
 
