@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 红包组合冻结接口
  */
 @RestController
+@RequestMapping("/combFreeze")
 public class combFreezeController {
     @RequestMapping("/s2s")
     public String notice(@RequestParam("resultCode") String resultCode,

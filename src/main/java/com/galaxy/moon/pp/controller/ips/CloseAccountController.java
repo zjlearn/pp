@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * create by zhangjun1 on 2018/1/20
  */
 @RestController
+@RequestMapping("/cloaseAccount")
 public class CloseAccountController {
     @RequestMapping("/s2s")
     public String notice(@RequestParam("resultCode") String resultCode,
