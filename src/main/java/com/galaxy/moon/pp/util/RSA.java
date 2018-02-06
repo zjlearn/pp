@@ -1,6 +1,5 @@
 package com.galaxy.moon.pp.util;
 
-import com.galaxy.moon.common.Constants;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.crypto.Cipher;
@@ -28,17 +27,17 @@ public class RSA {
      * @throws Exception
      */
     public static byte[] encrypt(PublicKey publicKey, String message) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+
         // 加密时超过117字节就报错。为此采用分段加密的办法来加密
         byte[] enBytes = null;
-        byte [] data = message.getBytes(Constants.UTF_8_ENCODING);
-        for (int i = 0; i < data.length; i += 64) {
+        byte [] data = message.getBytes("UTF-8");
+        for (int i = 0; i < data.length; i += 128) {
         // 注意要使用2的倍数，否则会出现加密后的内容再解密时为乱码
-            byte[] doFinal = cipher.doFinal(ArrayUtils.subarray(data, i, i + 64));
+            byte[] doFinal = cipher.doFinal(ArrayUtils.subarray(data, i, i + 128));
             enBytes = ArrayUtils.addAll(enBytes, doFinal);
         }
-
         return enBytes;
     }
 

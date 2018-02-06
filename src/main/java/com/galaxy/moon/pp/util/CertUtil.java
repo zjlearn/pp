@@ -39,7 +39,7 @@ public class CertUtil {
      */
     public static PrivateKey getMerCa(byte[] bytes) throws Exception {
         ByteArrayInputStream fis = new ByteArrayInputStream(bytes);
-        String strPassword = "sft12#";//密码
+        String strPassword = "111111";//密码
         char[] nPassword = strPassword.toCharArray();
         PrivateKey privateKey = null;
         try {

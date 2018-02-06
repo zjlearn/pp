@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Base64;
 
 
-
 /**
  * create by zhangjun1 on 2018/1/8
  * <p>
@@ -33,11 +32,11 @@ public class IPSRSACryptoUtil {
         String sign = null;
         try {
             // 加密---bank公钥
-            reqDate = Base64.getEncoder().encodeToString(RSA.encrypt(CertUtil.getEncryptCertPublicKey(), req));
+            reqDate = new String(Base64.getEncoder().encode(RSA.encrypt(IPSCertUtil.getEncryptCertPublicKey(), req)), "UTF-8");
 
             // 加签---商户私钥
-            sign = Hex.encodeHexString(RSA.signSHA256(CertUtil.getSignCertPrivateKey(),
-                    reqSignStr(merchantID, operationType, reqDate).getBytes(Constants.UTF_8_ENCODING)));
+            sign = new String(Base64.getEncoder().encode(RSA.signSHA256(IPSCertUtil.getSignCertPrivateKey(),
+                    reqSignStr(merchantID, operationType, reqDate).getBytes(Constants.UTF_8_ENCODING))), Constants.UTF_8_ENCODING);
         } catch (Exception e) {
             log.error(e.getMessage() + "加密异常", e);
             return null;
@@ -63,12 +62,12 @@ public class IPSRSACryptoUtil {
         String msg = "验签失败！";
         try {
 
-            flag = RSA.verifySHA256(CertUtil.getEncryptCertPublicKey(),
+            flag = RSA.verifySHA256(IPSCertUtil.getEncryptCertPublicKey(),
                     respSignStr(merchantID, resultCode, resultMsg, response).getBytes(Constants.UTF_8_ENCODING),
                     Hex.decodeHex(sign.toCharArray()));
             if (flag && !StringUtils.isEmpty(response)) {
                 // 解密商户私钥解密
-                reqDate = new String(RSA.decrypt(CertUtil.getSignCertPrivateKey(), Base64.getDecoder().decode(response)), Constants.UTF_8_ENCODING);
+                reqDate = new String(RSA.decrypt(IPSCertUtil.getSignCertPrivateKey(), Base64.getDecoder().decode(response)), Constants.UTF_8_ENCODING);
             }
         } catch (Exception e) {
             log.error(e.getMessage() + "验签异常！", e);
