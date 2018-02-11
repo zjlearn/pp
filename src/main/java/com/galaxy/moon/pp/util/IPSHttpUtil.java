@@ -25,7 +25,7 @@ public class IPSHttpUtil {
 
     // 该过程包括加密，签名， 和发送请求
     public IpsResponse post(String merchantID, String operationType, String reqStr){
-        JSONObject result =  IPSRSACryptoUtil.genReqData(merchantID, operationType, reqStr);
+        JSONObject result =  IPSRSAUtil.genReqData(merchantID, operationType, reqStr);
         // begin to send request
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
         Map map = new HashMap<String, String>();

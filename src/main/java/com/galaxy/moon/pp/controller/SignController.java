@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.netework.HttpManager;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.dto.UserRegisterDTO;
-import com.galaxy.moon.pp.util.CertUtil;
 import com.galaxy.moon.pp.util.IPSCertUtil;
 import com.galaxy.moon.pp.util.IPSCryptoUtil;
-import com.galaxy.moon.pp.util.IPSRSACryptoUtil;
-import com.ips.commons.security.StringUtils;
+import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -48,7 +45,7 @@ public class SignController {
     public JSONObject sign(@RequestParam("merchantID") String merchantID,
                            @RequestParam("operationType") String operationType,
                            @RequestParam("request") String request) {
-        return IPSRSACryptoUtil.genReqData(merchantID, operationType, request);
+        return IPSRSAUtil.genReqData(merchantID, operationType, request);
     }
 
     @RequestMapping("/getSign")
@@ -75,7 +72,7 @@ public class SignController {
         System.out.println("==========");
 
 
-        JSONObject result = IPSRSACryptoUtil.genReqData(merchantID, operationType, reqStr);
+        JSONObject result = IPSRSAUtil.genReqData(merchantID, operationType, reqStr);
         System.out.println(result);
 
         // begin to send request
@@ -107,6 +104,7 @@ public class SignController {
 
     @RequestMapping("/ips/getSign")
     public JSONObject Ipssign() {
+        System.out.println("/ips/getSign请求");
         String merchantID = "1186570022";
         String operationType = "user.register";
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
@@ -147,7 +145,7 @@ public class SignController {
             reqDate = new String(Base64.encodeBase64(encryptRSA), "UTF-8");
 
             // 加签---商户私钥
-            signDataBytes = IPSCryptoUtil.digitalSign(reqSignStr(merchantID, operationType, reqDate), IPSCertUtil.getSignCertPrivateKey(), "SHA256withRSA");
+            signDataBytes = IPSCryptoUtil.digitalSign(IPSRSAUtil.reqSignStr(merchantID, operationType, reqDate), IPSCertUtil.getSignCertPrivateKey(), "SHA256withRSA");
             sign = new String(Base64.encodeBase64(signDataBytes), "UTF-8");
         } catch (Exception e) {
             logger.error(e.getMessage() + "加密异常", e);
@@ -187,52 +185,7 @@ public class SignController {
 
     }
 
-    @RequestMapping("/ips/validate")
-    public String analysisDepRespData() throws Exception {
 
-        String merchantID = "1186570022";
-        String resultCode = "000000";
-        String resultMsg = "提现处理中";
-        String sign = "W2+1ye66Icj7W6cukbvykpd308PfnEpnM+K1FOph4DoonJU4LKlea+/xmj3jP3e561YqZ/4iGrZdCojapfosnAhoRItMMs/eCG+mw5DOd5T0S4apB/tsEadAKu3+9okFaPdw3dkuYMJc6lo0R4dHe2fR1Gh4bkklvQOoZW5rB/q4hkui7gzx9b8weupdAnpkIiolSH/tdVWirxrbaso4ORTWcKjGzXvlDiHok0AwxB2ePRbPGiZ/cBNjOh47uY8w57Y7LNzF1B/ued0WpsA5Jj/AFcd4lKpZeLeaHQEpJJI19arnVb7sBNBJp7UdBy/J4LcPAVjX6ALy1WxT8eonkw==";
-        String response = "ZoR6rumPIURk6EygaAhf7b9gbzY71mENj3oLUwRMLjpr2de/EMwR92hzHSZZvER2CAw6ABb9ySAka1Zs4ANYYupv8+HQ44S500KxCGMey8f5S4okA/a2wHMvaTOz+184SD8OtcsFaN1UodL1MkRaxdTXu5dZ3I3Zpos0V01bFreNYpTnNKxqg7DNksR365cMF2hn/dKZy+8psz1CYLhqBGAKK+ehhnY2fVHS6pyZ1uP3aVRLCdi95ttz3IjtgTq3AMxJxnnIfo9u9DGVMIyRR8cek6eTNKiJd1AmXGnGMpruqMCvwgVxMYlYrqDbwGnwxpwjA6eIWZAUF64BJg81DQ==";
-
-        boolean flag = true;
-        String reqDate = null;
-        String msg = "验签失败！";
-        // 签名域
-        byte[] signDataBytes = null;
-        byte[] ecryptRSA = null;
-        int keyLength = 0;
-        int reserveSize = 11;
-        PublicKey publicKey = null;
-        try {
-            // 银行公钥验签
-            publicKey = CertUtil.getEncryptCertPublicKey();
-            signDataBytes = Base64.decodeBase64(sign.getBytes(ENCODING));
-            flag = IPSCryptoUtil.verifyDigitalSign(respSignStr(merchantID, resultCode, resultMsg, response), signDataBytes, publicKey, "SHA256withRSA");
-
-            if (flag && !StringUtils.isEmpty(response)) {
-                // 解密商户私钥解密
-                keyLength = getKeySize(publicKey);
-                if (keyLength == 1024) {
-                    reserveSize = 0;
-                }
-                ecryptRSA = IPSCryptoUtil.RSADecrypt(Base64.decodeBase64(response.getBytes()), CertUtil.getSignCertPrivateKey(), keyLength, reserveSize,
-                        "RSA/ECB/PKCS1Padding");
-                reqDate = new String(ecryptRSA, ENCODING);
-                if (reqDate.substring(0, 3).equals("01|")) {
-                    reqDate = reqDate.substring(3);
-                }
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage() + "验签异常！", e);
-            msg = "验签异常！";
-        }
-        if (!flag) {
-            throw new Exception(msg);
-        }
-        return JSONObject.toJSONString(reqDate);
-    }
 
 
     private static int getKeySize(PublicKey publicKey) throws Exception {
@@ -247,22 +200,5 @@ public class SignController {
             prime = keySpec.getP();
         }
         return prime.toString(2).length();
-    }
-
-    private static byte[] reqSignStr(String merchantID, String operationType, String req) throws UnsupportedEncodingException {
-        StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append(merchantID);
-        sBuilder.append(operationType);
-        sBuilder.append(req);
-        return sBuilder.toString().getBytes("UTF-8");
-    }
-
-    private static byte[] respSignStr(String merchantID, String resultCode, String resultMsg, String respDate) throws UnsupportedEncodingException {
-        StringBuilder sBuilder = new StringBuilder();
-        sBuilder.append(merchantID);
-        sBuilder.append(resultCode);
-        sBuilder.append(resultMsg);
-        sBuilder.append(respDate);
-        return sBuilder.toString().getBytes(ENCODING);
     }
 }

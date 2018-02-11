@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.pp.model.IpsRequestParam;
 import com.galaxy.moon.pp.model.dto.UserRegisterDTO;
 import com.galaxy.moon.pp.util.IPSOperationTypeEnum;
-import com.galaxy.moon.pp.util.IPSRSACryptoUtil;
+import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +41,7 @@ public class UserRegisterController {
         userRegisterDTO.setS2SUrl("http://127.0.0.1:8080/p2p-dep/test/p2pweb.html");
         userRegisterDTO.setIdentNo(idCard);
         String reqStr = JSONObject.toJSONString(userRegisterDTO);
-        JSONObject result = IPSRSACryptoUtil.genReqData(IpsRequestParam.merchantID, IPSOperationTypeEnum.USER_REGISTER.getName(), reqStr);
+        JSONObject result = IPSRSAUtil.genReqData(IpsRequestParam.merchantID, IPSOperationTypeEnum.USER_REGISTER.getName(), reqStr);
         System.out.println(result);
         return result;
     }
