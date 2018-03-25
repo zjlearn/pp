@@ -2,7 +2,7 @@
 <configuration debug="false" scan="false" scanPeriod="60 seconds">
     <contextName>moon-pp</contextName>
 
-    <property name="logging.path" value="/home/logs/moon-pp"/>
+    <property name="logging.path" value="./logs"/>
     <property name="log.level" value="info"/>
     <property name="log.maxHistory" value="60"/>
     <property name="log.maxSize" value="50MB"/>

@@ -29,6 +29,7 @@ import java.util.Map;
 
 /**
  * create by zhangjun1 on 2018/1/9
+ * 该类目前仅仅测试使用
  */
 @RestController
 @RequestMapping("/xhr")
@@ -180,7 +181,9 @@ public class SignController {
 
         //向消息中心件发送消息
         ResponseEntity<String> response = httpManager.restTemplate().postForEntity(url, request, String.class);
-        System.out.println(response.getBody());
+//        System.out.println(response.getBody());
+
+        System.out.println(result);
         return result;
 
     }
