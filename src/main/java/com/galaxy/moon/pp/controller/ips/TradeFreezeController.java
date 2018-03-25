@@ -21,23 +21,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/xhr")
 public class TradeFreezeController {
-    @Autowired
-    IPSHttpUtil ipsHttpUtil;
 
-    @RequestMapping("/tradeFreeze")
-    public Result tradeFreeze(@RequestBody FreezeDTO freezeDTO) {
-        IpsResponse result = ipsHttpUtil.post(IpsRequestParam.merchantID, IPSOperationTypeEnum.TRADE_FREEZE.getName(),
-                JSON.toJSONString(freezeDTO));
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @RequestMapping("/s2s")
-    public String notice(@RequestParam("resultCode") String resultCode,
-                         @RequestParam("resultMsg") String resultMsg,
-                         @RequestParam("merchantID") String merchantID,
-                         @RequestParam("sign") String sign,
-                         @RequestParam("response") String response) {
-
-        return IpsRequestParam.scuessCode;
-    }
 }

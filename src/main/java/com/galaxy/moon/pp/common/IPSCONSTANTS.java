@@ -11,4 +11,5 @@ public class IPSCONSTANTS {
     public final static String SIGN_PARAM_merchantID = "merchantID";
     public final static String IPS_FILE_HOME = "/Users/zhangjun/doc/ips/fuming/";
     public final static String  merchantID = "1186570022";
+    public final static String scuessCode="ipsCheckOk";
 }

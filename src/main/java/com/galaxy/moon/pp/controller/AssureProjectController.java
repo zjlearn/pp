@@ -3,6 +3,7 @@ package com.galaxy.moon.pp.controller;
 import com.alibaba.fastjson.JSON;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
+import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.IpsResponse;
 import com.galaxy.moon.pp.model.IpsRequestParam;
 import com.galaxy.moon.pp.model.dto.AssureProjectDTO;
@@ -25,7 +26,7 @@ public class AssureProjectController {
     IPSHttpUtil ipsHttpUtil;
     @RequestMapping("/assureProject")
     public Result assureProject(@RequestBody AssureProjectDTO assureProjectDTO){
-        IpsResponse result = ipsHttpUtil.post(IpsRequestParam.merchantID, IPSOperationTypeEnum.PROJECT_ASSUREPROJECT.getName(),
+        IpsResponse result = ipsHttpUtil.post(IPSCONSTANTS.merchantID, IPSOperationTypeEnum.PROJECT_ASSUREPROJECT.getName(),
                 JSON.toJSONString(assureProjectDTO));
         return ResultGenerator.genSuccessResult();
     }
