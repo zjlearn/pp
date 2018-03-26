@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.controller.ips.UserRegisterController;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +14,6 @@ import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.DSAPublicKeySpec;
 import java.security.spec.RSAPublicKeySpec;
-
-import static sun.security.util.KeyUtil.getKeySize;
 
 /**
  * create by zhangjun1 on 2018/2/9
@@ -26,7 +25,13 @@ public class IPSRSAUtil {
 
     private static Logger logger = LoggerFactory.getLogger(UserRegisterController.class);
 
-
+    /**
+     * 负责利用公钥进行加密， 和私钥进行签名
+     * @param merchantID
+     * @param operationType
+     * @param reqStr
+     * @return
+     */
     public static  JSONObject genReqData(String merchantID, String operationType, String reqStr)  {
         //根据用户信息返回
         String sign = null;
@@ -62,6 +67,57 @@ public class IPSRSAUtil {
         result.put(IPSCONSTANTS.SIGN_PARAM_SIGN, sign);
         return result;
     }
+
+    /**
+     * 解析响应的报文
+     * @param merchantID
+     * @param resultCode
+     * @param resultMsg
+     * @param sign
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public static JSONObject analysisDepRespData(String merchantID, String resultCode, String resultMsg, String sign, String response) throws Exception {
+        boolean flag = true;
+        String reqDate = null;
+        String msg = "验签失败！";
+        // 签名域
+        byte[] signDataBytes = null;
+        byte[] ecryptRSA = null;
+        int keyLength = 0;
+        int reserveSize = 11;
+        PublicKey publicKey = null;
+        try {
+            // 银行公钥验签
+            publicKey= IPSCertUtil.getEncryptCertPublicKey();
+            signDataBytes = Base64.decodeBase64(sign.getBytes(ENCODING));
+            flag = IPSCryptoUtil.verifyDigitalSign(respSignStr(merchantID, resultCode, resultMsg, response), signDataBytes, publicKey, "SHA256withRSA");
+
+            if (flag && !StringUtils.isEmpty(response)) {
+                // 解密商户私钥解密
+                keyLength = getKeySize(publicKey);
+                if(keyLength==1024){
+                    reserveSize=0;
+                }
+                ecryptRSA = IPSCryptoUtil.RSADecrypt(Base64.decodeBase64(response.getBytes()), IPSCertUtil.getSignCertPrivateKey(), keyLength, reserveSize,
+                        "RSA/ECB/PKCS1Padding");
+                reqDate = new String(ecryptRSA, ENCODING);
+                if (reqDate.substring(0, 3).equals("01|")) {
+                    reqDate = reqDate.substring(3);
+                }
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage() + "验签异常！", e);
+            msg = "验签异常！";
+        }
+        if (!flag) {
+            throw new Exception(msg);
+        }
+        return JSONObject.parseObject(reqDate);
+    }
+
+
 
     /**
      * 构建request请求

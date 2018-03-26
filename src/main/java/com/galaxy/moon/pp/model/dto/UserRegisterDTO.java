@@ -8,179 +8,161 @@ import com.galaxy.moon.pp.util.Validate;
  */
 public class UserRegisterDTO implements RequestDTO {
 
-	public UserRegisterDTO(String userName, String merBillNo, String realName,
-						   String bizType, String mobileNo, String enterName, String merDate,
-						   String userType, String webUrl, String orgCode, String isAssureCom,
-						   String s2sUrl, String identNo) {
-		super();
-		this.userName = userName;
-		this.merBillNo = merBillNo;
-		this.realName = realName;
-		this.bizType = bizType;
-		this.mobileNo = mobileNo;
-		this.enterName = enterName;
-		this.merDate = merDate;
-		this.userType = userType;
-		this.webUrl = webUrl;
-		this.orgCode = orgCode;
-		this.isAssureCom = isAssureCom;
-		s2SUrl = s2sUrl;
-		this.identNo = identNo;
-	}
-	public UserRegisterDTO(){
-		
-	}
-	public String userName;
-	public String merBillNo;
-	public String realName;
-	public String bizType;
-	public String mobileNo;
-	public String enterName;
-	public String merDate;
-	public String userType;
-	public String webUrl;
-	public String orgCode;
-	public String isAssureCom;
-	public String s2SUrl;
-	public String identNo;
-	private String userRole ;
-	/*
-	 * validate every 
-	 */
-	public boolean validate(String  merchantID){  //all checked
-		boolean result=true;
-		result=result && Validate.NotEmpty("merBillNo", merBillNo);
-		result=result && Validate.NotEmpty("merDate", merDate);
-		result=result && Validate.oneOrTwo("userType", userType);
-		result=result && Validate.oneOrTwo("bizType", bizType);
-		
-		result=result && Validate.NotEmpty("userName", userName);
-		result=result && Validate.NotEmpty("mobileNo", mobileNo);
-		result=result && Validate.NotEmpty("identNo", identNo);
-		result=result && Validate.oneOrTwo("bizType", bizType);
-		result=result && Validate.zeroOrOne("isAssureCom", isAssureCom);
-		
-		result=result && Validate.NotEmpty("s2SUrl", s2SUrl);
-		result=result && Validate.NotEmpty("webUrl", webUrl);
-		
-		if(userType.equals("2")){ //�û�����Ϊ��ҵ
-			if(enterName.isEmpty() || orgCode.isEmpty()){
-				System.out.println("");
-				result=false;
-			}	
-		}
-		return result;
-	}
+    public String userName;
+    public String merBillNo;
+    public String realName;
+    public String bizType;
+    public String mobileNo;
+    public String enterName;
+    public String merDate;
+    public String userType;
+    public String webUrl;
+    public String orgCode;
+    public String isAssureCom;
+    public String s2SUrl;
+    public String identNo;
+    private String userRole;
 
-	public String getUserName() {
-		return userName;
-	}
+    public UserRegisterDTO() {
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    /*
+     * validate every
+     */
+    public boolean validate(String merchantID) {  //all checked
+        boolean result = true;
+        result = result && Validate.NotEmpty("merBillNo", merBillNo);
+        result = result && Validate.NotEmpty("merDate", merDate);
+        result = result && Validate.oneOrTwo("userType", userType);
+        result = result && Validate.oneOrTwo("bizType", bizType);
 
-	public String getMerBillNo() {
-		return merBillNo;
-	}
+        result = result && Validate.NotEmpty("userName", userName);
+        result = result && Validate.NotEmpty("mobileNo", mobileNo);
+        result = result && Validate.NotEmpty("identNo", identNo);
+        result = result && Validate.oneOrTwo("bizType", bizType);
+        result = result && Validate.zeroOrOne("isAssureCom", isAssureCom);
 
-	public void setMerBillNo(String merBillNo) {
-		this.merBillNo = merBillNo;
-	}
+        result = result && Validate.NotEmpty("s2SUrl", s2SUrl);
+        result = result && Validate.NotEmpty("webUrl", webUrl);
 
-	public String getRealName() {
-		return realName;
-	}
+        if (userType.equals("2")) { //�û�����Ϊ��ҵ
+            if (enterName.isEmpty() || orgCode.isEmpty()) {
+                System.out.println("");
+                result = false;
+            }
+        }
+        return result;
+    }
 
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public String getBizType() {
-		return bizType;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setBizType(String bizType) {
-		this.bizType = bizType;
-	}
+    public String getMerBillNo() {
+        return merBillNo;
+    }
 
-	public String getMobileNo() {
-		return mobileNo;
-	}
+    public void setMerBillNo(String merBillNo) {
+        this.merBillNo = merBillNo;
+    }
 
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
+    public String getRealName() {
+        return realName;
+    }
 
-	public String getEnterName() {
-		return enterName;
-	}
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
-	public void setEnterName(String enterName) {
-		this.enterName = enterName;
-	}
+    public String getBizType() {
+        return bizType;
+    }
 
-	public String getMerDate() {
-		return merDate;
-	}
+    public void setBizType(String bizType) {
+        this.bizType = bizType;
+    }
 
-	public void setMerDate(String merDate) {
-		this.merDate = merDate;
-	}
+    public String getMobileNo() {
+        return mobileNo;
+    }
 
-	public String getUserType() {
-		return userType;
-	}
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
+    public String getEnterName() {
+        return enterName;
+    }
 
-	public String getWebUrl() {
-		return webUrl;
-	}
+    public void setEnterName(String enterName) {
+        this.enterName = enterName;
+    }
 
-	public void setWebUrl(String webUrl) {
-		this.webUrl = webUrl;
-	}
+    public String getMerDate() {
+        return merDate;
+    }
 
-	public String getOrgCode() {
-		return orgCode;
-	}
+    public void setMerDate(String merDate) {
+        this.merDate = merDate;
+    }
 
-	public void setOrgCode(String orgCode) {
-		this.orgCode = orgCode;
-	}
+    public String getUserType() {
+        return userType;
+    }
 
-	public String getIsAssureCom() {
-		return isAssureCom;
-	}
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
-	public void setIsAssureCom(String isAssureCom) {
-		this.isAssureCom = isAssureCom;
-	}
+    public String getWebUrl() {
+        return webUrl;
+    }
 
-	public String getS2SUrl() {
-		return s2SUrl;
-	}
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
 
-	public void setS2SUrl(String s2SUrl) {
-		this.s2SUrl = s2SUrl;
-	}
+    public String getOrgCode() {
+        return orgCode;
+    }
 
-	public String getIdentNo() {
-		return identNo;
-	}
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
 
-	public void setIdentNo(String identNo) {
-		this.identNo = identNo;
-	}
+    public String getIsAssureCom() {
+        return isAssureCom;
+    }
 
-	public String getUserRole() {
-		return userRole;
-	}
+    public void setIsAssureCom(String isAssureCom) {
+        this.isAssureCom = isAssureCom;
+    }
 
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
+    public String getS2SUrl() {
+        return s2SUrl;
+    }
+
+    public void setS2SUrl(String s2SUrl) {
+        this.s2SUrl = s2SUrl;
+    }
+
+    public String getIdentNo() {
+        return identNo;
+    }
+
+    public void setIdentNo(String identNo) {
+        this.identNo = identNo;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 }
