@@ -87,6 +87,13 @@
             <version>1.56</version>
         </dependency>
 
+        <!--bpm相关的依赖-->
+        <dependency>
+            <groupId>com.galaxy.moon</groupId>
+            <artifactId>bpm</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>
