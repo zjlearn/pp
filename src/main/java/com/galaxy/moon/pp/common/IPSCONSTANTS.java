@@ -12,6 +12,6 @@ public class IPSCONSTANTS {
     public final static String IPS_FILE_HOME = "/Users/zhangjun/doc/ips/fuming/";
     public final static String merchantID = "1186570022";
     public final static String S2S_SCUESSCODE = "ipsCheckOk";
-    public final static String RESPONSE_FAIL_CODE = "000000";
-    public final static String RESPONSE_SCUESS_CODE = "999999";
+    public final static String RESPONSE_FAIL_CODE = "999999";
+    public final static String RESPONSE_SCUESS_CODE = "000000";
 }

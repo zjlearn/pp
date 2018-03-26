@@ -1,68 +1,135 @@
 package com.galaxy.moon.pp.model.dto;
-import com.galaxy.moon.pp.util.Validate;
+
+public class DepositDTO {
+
+    public String merBillNo;
+    public String merDate;
+    public String depositType;
+    public String channelType;
+    public String bankCode;
+    public String userType;
+    public String ipsAcctNo;
+    public Double trdAmt;
+    public String ipsFeeType;
+    public Double merFee;
+    public String taker;
+    public String merFeeType;
+    public String webUrl;
+    public String s2SUrl;
+
+    public DepositDTO() {
+    }
+
+    public String getMerBillNo() {
+        return merBillNo;
+    }
+
+    public void setMerBillNo(String merBillNo) {
+        this.merBillNo = merBillNo;
+    }
+
+    public String getMerDate() {
+        return merDate;
+    }
+
+    public void setMerDate(String merDate) {
+        this.merDate = merDate;
+    }
+
+    public String getDepositType() {
+        return depositType;
+    }
+
+    public void setDepositType(String depositType) {
+        this.depositType = depositType;
+    }
+
+    public String getChannelType() {
+        return channelType;
+    }
+
+    public void setChannelType(String channelType) {
+        this.channelType = channelType;
+    }
+
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getIpsAcctNo() {
+        return ipsAcctNo;
+    }
+
+    public void setIpsAcctNo(String ipsAcctNo) {
+        this.ipsAcctNo = ipsAcctNo;
+    }
+
+    public String getIpsFeeType() {
+        return ipsFeeType;
+    }
+
+    public void setIpsFeeType(String ipsFeeType) {
+        this.ipsFeeType = ipsFeeType;
+    }
 
 
-public class DepositDTO implements RequestDTO {
-	public DepositDTO(String merFee, String merBillNo, String taker,
-                      String merFeeType, String depositType, String webUrl,
-                      String merDate, String ipsFeeType, String userType, String trdAmt,
-                      String ipsAcctNo, String bankCode, String channelType, String s2sUrl) {
-		super();
-		this.merFee = merFee;
-		this.merBillNo = merBillNo;
-		this.taker = taker;
-		this.merFeeType = merFeeType;
-		this.depositType = depositType;
-		this.webUrl = webUrl;
-		this.merDate = merDate;
-		this.ipsFeeType = ipsFeeType;
-		this.userType = userType;
-		this.trdAmt = trdAmt;
-		this.ipsAcctNo = ipsAcctNo;
-		this.bankCode = bankCode;
-		this.channelType = channelType;
-		s2SUrl = s2sUrl;
-	}
-	public DepositDTO(){  //Ĭ�Ϲ��캯��
-		
-	}
-	public String merFee;
-	public String merBillNo;
-	public String taker;
-	public String merFeeType;
-	public String depositType;
-	public String webUrl;
-	public String merDate;
-	public String ipsFeeType;
-	public String userType;
-	public String trdAmt;
-	public String ipsAcctNo;
-	public String bankCode;
-	public String channelType;
-	public String s2SUrl;
-	@Override
-	public boolean validate(String merchantID) {  //part check , there is some not clear
-		// TODO Auto-generated method stub
-		boolean result=true;
-		result = result && Validate.NotEmpty("merBillNo",merBillNo);
-		result = result && Validate.NotEmpty("merDate",merDate);
-		result = result && Validate.oneOrTwo("depositType",depositType);
-		if(!channelType.isEmpty()){
-			result = result && Validate.oneOrTwo("channelType",channelType);
-		}else{ //Ϊ��
-			
-		}
-		result = result && Validate.oneOrTwo("userType",userType);
-		result = result && Validate.NotEmpty("ipsAcctNo",ipsAcctNo);
-		result = result && Validate.NotEmpty("trdAmt",trdAmt);
-		result = result && Validate.NotEmpty("merFee",merFee);
-		result = result && Validate.NotEmpty("s2SUrl",s2SUrl);
-		result = result && Validate.NotEmpty("webUrl",webUrl);
-		
-		result=result && Validate.oneOrTwo("ipsFeeType", ipsFeeType);
-		result=result && Validate.oneOrTwo("merFeeType", merFeeType);
-		result=result && Validate.oneOrTwo("taker", taker);
-		
-		return result;
-	}
+    public String getTaker() {
+        return taker;
+    }
+
+    public void setTaker(String taker) {
+        this.taker = taker;
+    }
+
+    public String getMerFeeType() {
+        return merFeeType;
+    }
+
+    public void setMerFeeType(String merFeeType) {
+        this.merFeeType = merFeeType;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public String getS2SUrl() {
+        return s2SUrl;
+    }
+
+    public void setS2SUrl(String s2SUrl) {
+        this.s2SUrl = s2SUrl;
+    }
+
+    public Double getTrdAmt() {
+        return trdAmt;
+    }
+
+    public void setTrdAmt(Double trdAmt) {
+        this.trdAmt = trdAmt;
+    }
+
+    public Double getMerFee() {
+        return merFee;
+    }
+
+    public void setMerFee(Double merFee) {
+        this.merFee = merFee;
+    }
 }

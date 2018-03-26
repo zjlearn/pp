@@ -2,6 +2,7 @@ package com.galaxy.moon.pp.controller.ips;
 
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
+import com.galaxy.moon.pp.biz.ips.DepositHandler;
 import com.galaxy.moon.pp.biz.ips.UserRegisterHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,16 @@ public class UserRegisterController {
     @Autowired
     UserRegisterHandler userRegisterHandler;
 
+    @Autowired
+    DepositHandler depositHandler;
+
     @RequestMapping("/userRegister")
     public Result userRegister(@RequestBody JSONObject jsonObject) {
         return userRegisterHandler.userRegister(jsonObject);
+    }
+
+    @RequestMapping("/deposit")
+    public Result deposit(@RequestBody JSONObject jsonObject) {
+        return depositHandler.deposit(jsonObject);
     }
 }
