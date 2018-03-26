@@ -1,5 +1,6 @@
 package com.galaxy.moon.pp.util;
 
+import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,19 +23,31 @@ import java.util.concurrent.ConcurrentHashMap;
 public class IPSCertUtil {
     private static final Logger log = LoggerFactory.getLogger(IPSCertUtil.class);
 
-    /** 证书容器. */
+    /**
+     * 证书容器.
+     */
     private static KeyStore keyStore = null;
-    /** 密码加密证书 */
+    /**
+     * 密码加密证书
+     */
     private static X509Certificate encryptCert = null;
 
 
-    /** 验证签名证书. */
+    /**
+     * 验证签名证书.
+     */
     private static X509Certificate validateCert = null;
-    /** 验签证书存储Map. */
+    /**
+     * 验签证书存储Map.
+     */
     private static Map<String, X509Certificate> certMap = new HashMap<String, X509Certificate>();
-    /** 根据传入证书文件路径和密码读取指定的证书容器.(一种线程安全的实现方式) */
+    /**
+     * 根据传入证书文件路径和密码读取指定的证书容器.(一种线程安全的实现方式)
+     */
     private final static ThreadLocal<KeyStore> certKeyStoreLocal = new ThreadLocal<KeyStore>();
-    /** 基于Map存储多商户RSA私钥 */
+    /**
+     * 基于Map存储多商户RSA私钥
+     */
     private final static Map<String, KeyStore> certKeyStoreMap = new ConcurrentHashMap<String, KeyStore>();
 
     static {
@@ -47,7 +60,7 @@ public class IPSCertUtil {
     public static void init() {
 
         initSignCert();
-        initValidateCertFromDir();// 初始化所有的验签证书
+//        initValidateCertFromDir();// 初始化所有的验签证书
     }
 
     /**
@@ -58,7 +71,7 @@ public class IPSCertUtil {
             keyStore = null;
         }
         try {
-            keyStore = getKeyInfo("D://certs//mer_privateKey.pfx","111111", "PKCS12");
+            keyStore = getKeyInfo(IPSCONSTANTS.IPS_FILE_HOME+ "mer_privateKey.pfx", "111111", "PKCS12");
             log.info("InitSignCert Successful. CertId=["
                     + getSignCertId() + "]");
         } catch (IOException e) {
@@ -68,6 +81,7 @@ public class IPSCertUtil {
 
     /**
      * 根据传入的证书文件路径和证书密码加载指定的签名证书
+     *
      * @deprecated
      */
     public static void initSignCert(String certFilePath, String certPwd) {
@@ -107,9 +121,7 @@ public class IPSCertUtil {
     }
 
 
-
     /**
-     *
      * @param path
      * @return
      */
@@ -142,7 +154,6 @@ public class IPSCertUtil {
 
     /**
      * 从指定目录下加载验证签名证书
-     *
      */
     public static void initValidateCertFromDir() {
         certMap.clear();
@@ -196,7 +207,7 @@ public class IPSCertUtil {
             if (aliasenum.hasMoreElements()) {
                 keyAlias = aliasenum.nextElement();
             }
-            PrivateKey privateKey = (PrivateKey) keyStore.getKey(keyAlias,"111111".toCharArray());
+            PrivateKey privateKey = (PrivateKey) keyStore.getKey(keyAlias, "111111".toCharArray());
             return privateKey;
         } catch (KeyStoreException e) {
             log.error("getSignCertPrivateKey Error", e);
@@ -211,7 +222,6 @@ public class IPSCertUtil {
     }
 
 
-
     /**
      * 获取加密证书公钥.密码加密时需要
      *
@@ -219,7 +229,7 @@ public class IPSCertUtil {
      */
     public static PublicKey getEncryptCertPublicKey() {
         if (null == encryptCert) {
-            String path ="D://certs//bank_publicKey.cer";
+            String path = IPSCONSTANTS.IPS_FILE_HOME + "bank_publicKey.cer";
             //SDKConfig.getConfig().getEncryptCertPath();
             if (!isEmpty(path)) {
                 encryptCert = initCert(path);
@@ -232,8 +242,6 @@ public class IPSCertUtil {
             return encryptCert.getPublicKey();
         }
     }
-
-
 
 
     /**
@@ -261,12 +269,9 @@ public class IPSCertUtil {
     /**
      * 将证书文件读取为证书存储对象
      *
-     * @param pfxkeyfile
-     *            证书文件名
-     * @param keypwd
-     *            证书密码
-     * @param type
-     *            证书类型
+     * @param pfxkeyfile 证书文件名
+     * @param keypwd     证书密码
+     * @param type       证书类型
      * @return 证书对象
      * @throws IOException
      */
@@ -289,7 +294,7 @@ public class IPSCertUtil {
                             new org.bouncycastle.jce.provider.BouncyCastleProvider(),
                             1);
                     printSysInfo();
-                }else{
+                } else {
                     Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
                 }
 //				ks = KeyStore.getInstance(type, "BC");
@@ -314,8 +319,8 @@ public class IPSCertUtil {
                 Security.removeProvider("BC");
             }
             return null;
-        }finally{
-            if(null!=fis)
+        } finally {
+            if (null != fis)
                 fis.close();
         }
     }
@@ -350,7 +355,6 @@ public class IPSCertUtil {
 
     /**
      * 证书文件过滤器
-     *
      */
     static class CerFilter implements FilenameFilter {
         public boolean isCer(String name) {
@@ -360,21 +364,18 @@ public class IPSCertUtil {
                 return false;
             }
         }
+
         public boolean accept(File dir, String name) {
             return isCer(name);
         }
     }
 
 
-
-
     /**
      * 使用模和指数生成RSA公钥 注意：此代码用了默认补位方式，为RSA/None/PKCS1Padding，不同JDK默认的补位方式可能不同
      *
-     * @param modulus
-     *            模
-     * @param exponent
-     *            指数
+     * @param modulus  模
+     * @param exponent 指数
      * @return
      */
     public static PublicKey getPublicKey(String modulus, String exponent) {
@@ -393,8 +394,7 @@ public class IPSCertUtil {
     /**
      * 判断字符串是否为NULL或空
      *
-     * @param s
-     *            待判断的字符串数据
+     * @param s 待判断的字符串数据
      * @return 判断结果 true-是 false-否
      */
     public static boolean isEmpty(String s) {
