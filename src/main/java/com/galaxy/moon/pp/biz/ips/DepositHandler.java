@@ -26,9 +26,15 @@ public class DepositHandler {
     @Autowired
     UserService userService;
 
+    /**
+     * 参数中需要知道用户ID和 充值金额
+     * @param jsonObject
+     * @return
+     */
     public Result deposit(JSONObject jsonObject) {
         String billNo = uuidService.nextStrId();
         long userId = jsonObject.getLong("userId");
+        double amount = jsonObject.getDouble("amount"); //
         User user = userService.findById(userId);
 
         DepositDTO depositDTO = new DepositDTO();
@@ -36,11 +42,10 @@ public class DepositHandler {
         depositDTO.setMerDate(DateUtil.parseLongToString(System.currentTimeMillis(), DateUtil.defaultDatePattern));
         depositDTO.setDepositType("1");
         depositDTO.setChannelType("1");
-        depositDTO.setBankCode("");
         depositDTO.setUserType(String.valueOf(user.getUserType()));
         depositDTO.setIpsAcctNo(user.getIpsAccount());
         depositDTO.setIpsFeeType("1");
-        depositDTO.setMerFee(1.00);
+        depositDTO.setMerFee(amount);
         depositDTO.setMerFeeType("1");
 
         String reqStr = JSONObject.toJSONString(depositDTO);

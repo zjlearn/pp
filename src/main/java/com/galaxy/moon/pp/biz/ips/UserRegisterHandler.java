@@ -27,16 +27,16 @@ public class UserRegisterHandler {
 
     private Logger logger = LoggerFactory.getLogger(UserRegisterController.class);
 
-    public Result userRegister(JSONObject jsonObject) {
+    public Result userRegister(JSONObject jsonObject, long userId) {
 
         String realName = jsonObject.getString("name");
         String idCard = jsonObject.getString("idCard");
-        long userId = jsonObject.getLong("userId");
 
-        User user = userService.findById(userId);
-        user.setUserName(realName);
-        user.setIdCard(idCard);
-        int updateStatus = userService.updateByUserId(user);
+//        User user = userService.findById(userId);
+//        user.setUserName(realName);
+//        user.setIdCard(idCard);
+//        int updateStatus = userService.updateByUserId(user);
+        User user= new User();
 
         String orderId = UUID.randomUUID().toString();
 
