@@ -1,5 +1,7 @@
 package com.galaxy.moon.pp.model;
 
+import java.math.BigDecimal;
+
 public class User {
     private Long id;
 
@@ -29,9 +31,9 @@ public class User {
 
     private Integer redPacketNum;
 
-    private Long availableRemain;
+    private BigDecimal availableRemain;
 
-    private Long frozenRemain;
+    private BigDecimal frozenRemain;
 
     private Integer userRole;
 
@@ -153,19 +155,19 @@ public class User {
         this.redPacketNum = redPacketNum;
     }
 
-    public Long getAvailableRemain() {
+    public BigDecimal getAvailableRemain() {
         return availableRemain;
     }
 
-    public void setAvailableRemain(Long availableRemain) {
+    public void setAvailableRemain(BigDecimal availableRemain) {
         this.availableRemain = availableRemain;
     }
 
-    public Long getFrozenRemain() {
+    public BigDecimal getFrozenRemain() {
         return frozenRemain;
     }
 
-    public void setFrozenRemain(Long frozenRemain) {
+    public void setFrozenRemain(BigDecimal frozenRemain) {
         this.frozenRemain = frozenRemain;
     }
 

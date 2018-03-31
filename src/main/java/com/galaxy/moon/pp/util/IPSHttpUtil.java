@@ -24,8 +24,8 @@ public class IPSHttpUtil {
     HttpManager httpManager;
 
     // 该过程包括加密，签名， 和发送请求
-    public IpsResponse post(String merchantID, String operationType, String reqStr){
-        JSONObject result =  IPSRSAUtil.genReqData(merchantID, operationType, reqStr);
+    public IpsResponse post(String merchantID, String operationType, String reqStr) {
+        JSONObject result = IPSRSAUtil.genReqData(merchantID, operationType, reqStr);
         // begin to send request
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
         Map map = new HashMap<String, String>();
@@ -35,7 +35,7 @@ public class IPSHttpUtil {
 
         //使用RestTemplate向MPS发送消息时, 必须使用下面的写法。
         //MPS强制的提交方式是： POST， 表单， 参数提交方式
-        MultiValueMap<String, String> req_form  = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> req_form = new LinkedMultiValueMap<>();
         req_form.add(IPSCONSTANTS.SIGN_PARAM_merchantID, result.getString(IPSCONSTANTS.SIGN_PARAM_merchantID));
         req_form.add(IPSCONSTANTS.SIGN_PARAM_operationType, result.getString(IPSCONSTANTS.SIGN_PARAM_operationType));
         req_form.add(IPSCONSTANTS.SIGN_PARAM_REQUEST, result.getString(IPSCONSTANTS.SIGN_PARAM_REQUEST));
@@ -43,7 +43,7 @@ public class IPSHttpUtil {
 
         HttpEntity<?> request = new HttpEntity<>(req_form, headers);
 
-        String url= "http://113.207.54.122:8011/p2p-dep/gateway.htm";
+        String url = "http://113.207.54.122:8011/p2p-dep/gateway.htm";
 
         //向消息中心件发送消息
         IpsResponse response = httpManager.restTemplate().postForObject(url, request, IpsResponse.class);
