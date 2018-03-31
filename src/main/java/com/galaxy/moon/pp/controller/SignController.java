@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 import static sun.security.util.KeyUtil.getKeySize;
 
@@ -49,24 +51,27 @@ public class SignController {
 
     @RequestMapping("/ips/getSign")
     public JSONObject Ipssign() {
+
+        Random random = new Random();
+        long merBillNo = random.nextLong();
         System.out.println("/ips/getSign请求");
         String merchantID = "1186570022";
         String operationType = "user.register";
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
-        userRegisterDTO.setMerBillNo("23235413");
+        userRegisterDTO.setMerBillNo(String.valueOf(merBillNo));
         userRegisterDTO.setMerDate("2018-01-10");
         userRegisterDTO.setUserName("zj");
         userRegisterDTO.setUserType("1");
         userRegisterDTO.setUserRole("1");
-        userRegisterDTO.setUserName("章的");
-        userRegisterDTO.setRealName("哈哈");
-        userRegisterDTO.setMobileNo("13016413998");
+        userRegisterDTO.setUserName("章的3");
+        userRegisterDTO.setRealName("哈号");
+        userRegisterDTO.setMobileNo("13016413990");
         userRegisterDTO.setBizType("1");
         userRegisterDTO.setEnterName("");
         userRegisterDTO.setIsAssureCom("1");
-        userRegisterDTO.setWebUrl("http://127.0.0.1:8080/p2p-dep/test/p2pweb.html");
-        userRegisterDTO.setS2SUrl("http://127.0.0.1:8080/p2p-dep/test/p2pweb.html");
-        userRegisterDTO.setIdentNo("411527199210145036");
+        userRegisterDTO.setWebUrl("https://baike.baidu.com/item/你好/32416?fr=aladdin");
+        userRegisterDTO.setS2SUrl(IPSCONSTANTS.server_Domain + "/ips/s2s/userRegister");
+        userRegisterDTO.setIdentNo("500103199112248670");
         String reqStr = JSONObject.toJSONString(userRegisterDTO);
         System.out.println(reqStr);
         System.out.println("==========");

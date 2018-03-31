@@ -25,6 +25,7 @@ public class S2SController {
                          @RequestParam("merchantID") String merchantID,
                          @RequestParam("sign") String sign,
                          @RequestParam("response") String response) {
+        System.out.println("接收到ips的s2s相应通知");
         return s2SHandler.userRegister(resultCode, resultMsg, merchantID, sign, response);
     }
 }
