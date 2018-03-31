@@ -27,9 +27,7 @@ public class UserRegisterController {
 
     @RequestMapping("/userRegister")
     public Result userRegister(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
-        long userId = (Long) httpSession.getAttribute("userId");
-        System.out.println("userId is " + userId);
-        return userRegisterHandler.userRegister(jsonObject, userId);
+        return userRegisterHandler.userRegister(jsonObject, 200);
     }
 
     @RequestMapping("/deposit")

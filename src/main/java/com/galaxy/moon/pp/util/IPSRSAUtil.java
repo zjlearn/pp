@@ -65,6 +65,7 @@ public class IPSRSAUtil {
         result.put(IPSCONSTANTS.SIGN_PARAM_operationType, operationType);
         result.put(IPSCONSTANTS.SIGN_PARAM_REQUEST, reqDate);
         result.put(IPSCONSTANTS.SIGN_PARAM_SIGN, sign);
+        System.out.println(result);
         return result;
     }
 
