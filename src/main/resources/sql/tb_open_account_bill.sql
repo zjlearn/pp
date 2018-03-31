@@ -1,5 +1,5 @@
 -- 基本的订单信息表
-CREATE TABLE `tb_bill` (
+CREATE TABLE `tb_open_account_bill` (
   `id` BIGINT (20) NOT NULL AUTO_INCREMENT COMMENT '主键 自增',
   `billCode` VARCHAR (32) NULL COMMENT '单据Code',
   `billName` VARCHAR (32) NULL COMMENT '单据名称',

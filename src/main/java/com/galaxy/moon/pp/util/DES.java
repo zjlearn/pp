@@ -1,4 +1,4 @@
-﻿package com.galaxy.moon.pp.util;
+package com.galaxy.moon.pp.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -69,6 +69,4 @@ public class DES {
     	System.out.println("解密："+encrypt3DES(decrypt3DES(decryptString,decryptKey,iv),decryptKey,iv).replaceAll("\n", ""));
     	
     }
-    
-
 }
