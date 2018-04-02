@@ -52,5 +52,17 @@
             <property name="useActualColumnNames" value="true" />
         </table>
 
+        <table tableName="tb_open_account_bill" domainObjectName="OpenAccountBill" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true" />
+        </table>
+
+        <table tableName="tb_deposit_bill" domainObjectName="DepositBill" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true" />
+        </table>
+
+        <table tableName="tb_withdraw_bill" domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true" />
+        </table>
+
     </context>
 </generatorConfiguration>
