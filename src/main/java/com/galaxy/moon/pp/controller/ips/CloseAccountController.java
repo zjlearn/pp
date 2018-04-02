@@ -1,23 +1,38 @@
 package com.galaxy.moon.pp.controller.ips;
 
+import com.alibaba.fastjson.JSONObject;
+import com.galaxy.moon.common.Result;
+import com.galaxy.moon.pp.biz.ips.CloseAccountHandler;
+import com.galaxy.moon.pp.biz.ips.DepositHandler;
+import com.galaxy.moon.pp.biz.ips.UserRegisterHandler;
 import com.galaxy.moon.pp.model.IpsRequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * create by zhangjun1 on 2018/1/20
  */
 @RestController
-@RequestMapping("/cloaseAccount")
+@RequestMapping("/xhr/ips/closeAccount")
 public class CloseAccountController {
-    @RequestMapping("/s2s")
-    public String notice(@RequestParam("resultCode") String resultCode,
-                         @RequestParam("resultMsg") String resultMsg,
-                         @RequestParam("merchantID") String merchantID,
-                         @RequestParam("sign") String sign,
-                         @RequestParam("response") String response) {
+    @Autowired
+    CloseAccountHandler closeAccountHandler;
 
-        return IpsRequestParam.scuessCode;
+    @ResponseBody
+    @RequestMapping("/sign")
+    public Result sign(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
+        return closeAccountHandler.sign(jsonObject, httpSession);
+    }
+
+    @RequestMapping("/inform")
+    public void inform(@RequestParam("resultCode") String resultCode,
+                             @RequestParam("resultMsg") String resultMsg,
+                             @RequestParam("merchantID") String merchantID,
+                             @RequestParam("sign") String sign,
+                             @RequestParam("response") String response, HttpServletResponse httpResponse) {
+        closeAccountHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
     }
 }

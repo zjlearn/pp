@@ -1,10 +1,9 @@
 package com.galaxy.moon.pp.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
+import com.galaxy.moon.pp.biz.UserHandler;
 import com.galaxy.moon.pp.model.User;
-import com.galaxy.moon.pp.model.vo.RegisterUserVO;
 import com.galaxy.moon.pp.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,7 @@ import java.security.SecureRandom;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserHandler userHandler;
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -38,32 +37,22 @@ public class UserController {
      */
     @PostMapping("/register")
     public Result register(@RequestParam("mobile") String mobile,
-                           @RequestParam("password") String password, @RequestParam(value = "inviteCode", required = false) String inviteCode) {
-        User user = new User();
-        user.setMobile(mobile);
-        user.setPassword(password);
-        user.setCreateTime(System.currentTimeMillis());
-        userService.addUser(user);
-        return ResultGenerator.genSuccessResult();
+                           @RequestParam("password") String password, @RequestParam(value = "inviteCode", required = false) String inviteCode, HttpSession session) {
+        return userHandler.register(mobile, password, inviteCode, session);
     }
 
 
     // form 的post表单方式提交
     @PostMapping("/login")
     public Result login(@RequestParam("mobile") String mobile, @RequestParam("password") String password, HttpSession httpSession) {
-        httpSession.setAttribute("mobile", mobile);
-        httpSession.setAttribute("password", password);
-        httpSession.setAttribute("userName", "曼曼");
-        httpSession.setAttribute("userId", 222L);
-        System.out.println("用户登录");
-        return ResultGenerator.genSuccessResult();
+        return userHandler.login(mobile, password, httpSession);
     }
 
     // form 的post表单方式提交
-    @GetMapping("/getUserName")
+    @GetMapping("/currentUser")
     public Result login(HttpSession httpSession) {
-        Object name = httpSession.getAttribute("userName");
-        return ResultGenerator.genSuccessResult(name);
+        User user = (User) httpSession.getAttribute("user");
+        return ResultGenerator.genSuccessResult(user);
     }
 
     @RequestMapping("/salt")

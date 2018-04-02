@@ -1,29 +1,37 @@
 package com.galaxy.moon.pp.model;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
-/**
- * create by zhangjun1 on 2017/12/20
- * 代表具体的产品
- */
 public class Product {
     private Long id;
-    private String name;
-    private String productNo; //产品编号
-    private int type; // 产品类别
-    private BigDecimal amount;  //总额
-    private BigDecimal restAmount; // 剩余
-    private Integer duration;  //期限
-    private double profitRate;
-    private Long assetsId;  //关联的资产Id
 
-    private Integer status;  //状态
+    private String productName;
+
+    private Integer productType;
+
+    private Integer productDetailId;
+
+    private Integer amount;
+
+    private Double rateReturn;
+
+    private Integer duration;
+
+    private Integer lowerLimit;
+
+    private Integer autoInvest;
+
+    private Integer remainder;
+
+    private Byte status;
+
     private Long createTime;
-    private Long updateTime;
 
+    private Date updateTime;
 
-    public Product() {
-    }
+    private Long deleteTime;
+
+    private Integer deleteFlag;
 
     public Long getId() {
         return id;
@@ -33,44 +41,44 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName == null ? null : productName.trim();
     }
 
-    public String getProductNo() {
-        return productNo;
+    public Integer getProductType() {
+        return productType;
     }
 
-    public void setProductNo(String productNo) {
-        this.productNo = productNo;
+    public void setProductType(Integer productType) {
+        this.productType = productType;
     }
 
-    public int getType() {
-        return type;
+    public Integer getProductDetailId() {
+        return productDetailId;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setProductDetailId(Integer productDetailId) {
+        this.productDetailId = productDetailId;
     }
 
-    public BigDecimal getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public BigDecimal getRestAmount() {
-        return restAmount;
+    public Double getRateReturn() {
+        return rateReturn;
     }
 
-    public void setRestAmount(BigDecimal restAmount) {
-        this.restAmount = restAmount;
+    public void setRateReturn(Double rateReturn) {
+        this.rateReturn = rateReturn;
     }
 
     public Integer getDuration() {
@@ -81,27 +89,35 @@ public class Product {
         this.duration = duration;
     }
 
-    public double getProfitRate() {
-        return profitRate;
+    public Integer getLowerLimit() {
+        return lowerLimit;
     }
 
-    public void setProfitRate(double profitRate) {
-        this.profitRate = profitRate;
+    public void setLowerLimit(Integer lowerLimit) {
+        this.lowerLimit = lowerLimit;
     }
 
-    public Long getAssetsId() {
-        return assetsId;
+    public Integer getAutoInvest() {
+        return autoInvest;
     }
 
-    public void setAssetsId(Long assetsId) {
-        this.assetsId = assetsId;
+    public void setAutoInvest(Integer autoInvest) {
+        this.autoInvest = autoInvest;
     }
 
-    public Integer getStatus() {
+    public Integer getRemainder() {
+        return remainder;
+    }
+
+    public void setRemainder(Integer remainder) {
+        this.remainder = remainder;
+    }
+
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -113,11 +129,27 @@ public class Product {
         this.createTime = createTime;
     }
 
-    public Long getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getDeleteTime() {
+        return deleteTime;
+    }
+
+    public void setDeleteTime(Long deleteTime) {
+        this.deleteTime = deleteTime;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }

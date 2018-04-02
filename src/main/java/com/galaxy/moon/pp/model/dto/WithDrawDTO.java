@@ -2,25 +2,25 @@ package com.galaxy.moon.pp.model.dto;
 
 
 public class WithDrawDTO {
-    public String merFee;
+    public Double merFee;
     public String merBillNo;
     public String merFeeType;
     public String webUrl;
     public String merDate;
     public String ipsFeeType;
     public String userType;
-    public String trdAmt;
+    public Double trdAmt;
     public String ipsAcctNo;
     public String s2SUrl;
 
     public WithDrawDTO() {
     }
 
-    public String getMerFee() {
+    public Double getMerFee() {
         return merFee;
     }
 
-    public void setMerFee(String merFee) {
+    public void setMerFee(Double merFee) {
         this.merFee = merFee;
     }
 
@@ -72,11 +72,11 @@ public class WithDrawDTO {
         this.userType = userType;
     }
 
-    public String getTrdAmt() {
+    public Double getTrdAmt() {
         return trdAmt;
     }
 
-    public void setTrdAmt(String trdAmt) {
+    public void setTrdAmt(Double trdAmt) {
         this.trdAmt = trdAmt;
     }
 

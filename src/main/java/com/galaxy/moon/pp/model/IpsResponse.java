@@ -9,7 +9,7 @@ public class IpsResponse {
     public  String resultMsg;
     public String sign;
     public String response;
-    public String message;
+    public String merchantID;
 
     public IpsResponse() {
     }
@@ -46,11 +46,22 @@ public class IpsResponse {
         this.response = response;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMerchantID() {
+        return merchantID;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
+    }
+
+    @Override
+    public String toString() {
+        return "IpsResponse{" +
+                "resultCode='" + resultCode + '\'' +
+                ", resultMsg='" + resultMsg + '\'' +
+                ", sign='" + sign + '\'' +
+                ", response='" + response + '\'' +
+                ", merchantID='" + merchantID + '\'' +
+                '}';
     }
 }

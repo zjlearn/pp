@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/ips/s2s")
+@RequestMapping("/xhr/ips/s2s")
 public class S2SController {
 
     @Autowired
@@ -27,5 +27,15 @@ public class S2SController {
                          @RequestParam("response") String response) {
         System.out.println("接收到ips的s2s相应通知");
         return s2SHandler.userRegister(resultCode, resultMsg, merchantID, sign, response);
+    }
+
+    @RequestMapping("/closeAccount")
+    public String closeAccount(@RequestParam("resultCode") String resultCode,
+                               @RequestParam("resultMsg") String resultMsg,
+                               @RequestParam("merchantID") String merchantID,
+                               @RequestParam("sign") String sign,
+                               @RequestParam("response") String response) {
+        System.out.println("接收到ips的s2s相应通知");
+        return s2SHandler.closeAccount(resultCode, resultMsg, merchantID, sign, response);
     }
 }

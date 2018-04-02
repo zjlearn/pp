@@ -2,23 +2,28 @@ package com.galaxy.moon.pp.biz.ips;
 
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
+import com.galaxy.moon.pp.model.LoggerName;
+import com.galaxy.moon.pp.service.UserService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * 负责接收Ip是消息通知的处理类， 该方式是异步回调
- *
  */
 @Component
 public class S2SHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(S2SHandler.class);
+    @Autowired
+    UserService userService;
 
+    private final Logger logger = LoggerFactory.getLogger(LoggerName.S2S_LOGGER);
 
     /**
      * 需要根据订单号查询出用户信息，之后做相应的关联
+     *
      * @param resultCode
      * @param resultMsg
      * @param merchantID
@@ -37,8 +42,11 @@ public class S2SHandler {
             String ipsDoTime = jsonObject.getString("ipsDoTime");
             String ipsAcctNo = jsonObject.getString("ipsAcctNo");
             String status = jsonObject.getString("status");
+            System.out.println("接收到ips的s2s通知如下： ");
 
+            logger.info("接收到异步的s2s消息成功，信息如下：" + jsonObject);
         } catch (Exception e) {
+            logger.error("接收到异步的s2s消息解析失败");
             e.printStackTrace();
         }
         return IPSCONSTANTS.S2S_SCUESSCODE;
@@ -46,6 +54,7 @@ public class S2SHandler {
 
     /**
      * 需要根据订单号查询出用户信息，之后做相应的关联
+     *
      * @param resultCode
      * @param resultMsg
      * @param merchantID
@@ -70,7 +79,6 @@ public class S2SHandler {
         }
         return IPSCONSTANTS.S2S_SCUESSCODE;
     }
-
 
 
     /**
@@ -102,6 +110,7 @@ public class S2SHandler {
 
     /**
      * 追加登记接口
+     *
      * @param resultCode
      * @param resultMsg
      * @param merchantID
@@ -128,9 +137,9 @@ public class S2SHandler {
     }
 
 
-
     /**
      * 追加登记接口
+     *
      * @param resultCode
      * @param resultMsg
      * @param merchantID
@@ -159,9 +168,9 @@ public class S2SHandler {
     }
 
 
-
     /**
      * 充值接口
+     *
      * @param resultCode
      * @param resultMsg
      * @param merchantID
@@ -191,5 +200,7 @@ public class S2SHandler {
         }
         return IPSCONSTANTS.S2S_SCUESSCODE;
     }
+
+
 
 }

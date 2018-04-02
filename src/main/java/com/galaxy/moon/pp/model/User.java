@@ -1,6 +1,7 @@
 package com.galaxy.moon.pp.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class User {
     private Long id;
@@ -25,15 +26,21 @@ public class User {
 
     private Byte marryStatus;
 
-    private Byte userType;
+    private Integer userType;
 
     private String ipsAccount;
 
     private Integer redPacketNum;
 
+    private BigDecimal assets;
+
     private BigDecimal availableRemain;
 
     private BigDecimal frozenRemain;
+
+    private Integer points;
+
+    private BigDecimal recomReward;
 
     private Integer userRole;
 
@@ -41,7 +48,11 @@ public class User {
 
     private Long createTime;
 
-    private Long updateTime;
+    private Date updateTime;
+
+    private Long deleteTime;
+
+    private Integer deleteFlag;
 
     public Long getId() {
         return id;
@@ -131,11 +142,11 @@ public class User {
         this.marryStatus = marryStatus;
     }
 
-    public Byte getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(Byte userType) {
+    public void setUserType(Integer userType) {
         this.userType = userType;
     }
 
@@ -155,6 +166,14 @@ public class User {
         this.redPacketNum = redPacketNum;
     }
 
+    public BigDecimal getAssets() {
+        return assets;
+    }
+
+    public void setAssets(BigDecimal assets) {
+        this.assets = assets;
+    }
+
     public BigDecimal getAvailableRemain() {
         return availableRemain;
     }
@@ -169,6 +188,30 @@ public class User {
 
     public void setFrozenRemain(BigDecimal frozenRemain) {
         this.frozenRemain = frozenRemain;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public BigDecimal getRecomReward() {
+        return recomReward;
+    }
+
+    public void setRecomReward(BigDecimal recomReward) {
+        this.recomReward = recomReward;
+    }
+
+    public Integer getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(Integer userRole) {
+        this.userRole = userRole;
     }
 
     public Byte getStatus() {
@@ -187,19 +230,27 @@ public class User {
         this.createTime = createTime;
     }
 
-    public Long getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
-    public Integer getUserRole() {
-        return userRole;
+    public Long getDeleteTime() {
+        return deleteTime;
     }
 
-    public void setUserRole(Integer userRole) {
-        this.userRole = userRole;
+    public void setDeleteTime(Long deleteTime) {
+        this.deleteTime = deleteTime;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }

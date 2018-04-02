@@ -1,9 +1,7 @@
 package com.galaxy.moon.pp.dao;
 
 import com.galaxy.moon.pp.model.User;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +14,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByMobile(String mobileNo);
 }

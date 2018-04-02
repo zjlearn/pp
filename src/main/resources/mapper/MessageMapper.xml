@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.galaxy.moon.pp.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.Message">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="messgaeName" jdbcType="VARCHAR" property="messgaeName" />
+    <result column="messgaeType" jdbcType="INTEGER" property="messgaeType" />
+    <result column="messgaeContent" jdbcType="VARCHAR" property="messgaeContent" />
+    <result column="messgaeStatus" jdbcType="INTEGER" property="messgaeStatus" />
+    <result column="createTime" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, messgaeName, messgaeType, messgaeContent, messgaeStatus, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.galaxy.moon.pp.model.Message">
+    insert into tb_message (id, messgaeName, messgaeType, 
+      messgaeContent, messgaeStatus, createTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{messgaeName,jdbcType=VARCHAR}, #{messgaeType,jdbcType=INTEGER}, 
+      #{messgaeContent,jdbcType=VARCHAR}, #{messgaeStatus,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.Message">
+    insert into tb_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="messgaeName != null">
+        messgaeName,
+      </if>
+      <if test="messgaeType != null">
+        messgaeType,
+      </if>
+      <if test="messgaeContent != null">
+        messgaeContent,
+      </if>
+      <if test="messgaeStatus != null">
+        messgaeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="messgaeName != null">
+        #{messgaeName,jdbcType=VARCHAR},
+      </if>
+      <if test="messgaeType != null">
+        #{messgaeType,jdbcType=INTEGER},
+      </if>
+      <if test="messgaeContent != null">
+        #{messgaeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messgaeStatus != null">
+        #{messgaeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.Message">
+    update tb_message
+    <set>
+      <if test="messgaeName != null">
+        messgaeName = #{messgaeName,jdbcType=VARCHAR},
+      </if>
+      <if test="messgaeType != null">
+        messgaeType = #{messgaeType,jdbcType=INTEGER},
+      </if>
+      <if test="messgaeContent != null">
+        messgaeContent = #{messgaeContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messgaeStatus != null">
+        messgaeStatus = #{messgaeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.Message">
+    update tb_message
+    set messgaeName = #{messgaeName,jdbcType=VARCHAR},
+      messgaeType = #{messgaeType,jdbcType=INTEGER},
+      messgaeContent = #{messgaeContent,jdbcType=VARCHAR},
+      messgaeStatus = #{messgaeStatus,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

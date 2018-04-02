@@ -8,8 +8,12 @@ import com.galaxy.moon.pp.model.User;
 public interface UserService {
     User findById(long  userId);
 
+    User findByMobile(String mobile);
+
     int addUser(User u);
 
     int updateByUserId(User user);
+
+
 
 }
