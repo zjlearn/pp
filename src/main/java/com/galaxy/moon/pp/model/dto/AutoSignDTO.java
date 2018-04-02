@@ -1,56 +1,135 @@
 package com.galaxy.moon.pp.model.dto;
 
 
-import com.galaxy.moon.pp.util.Validate;
+public class AutoSignDTO {
 
-public class AutoSignDTO implements RequestDTO {
-	public AutoSignDTO(String webUrl, String merBillNo, String rateMin,
-					   String rateMax, String bidMin, String bidMax, String validity,
-					   String merDate, String userType, String cycMaxVal,
-					   String ipsAcctNo, String signedType, String cycMinVal, String s2sUrl) {
-		super();
-		this.webUrl = webUrl;
-		this.merBillNo = merBillNo;
-		this.rateMin = rateMin;
-		this.rateMax = rateMax;
-		this.bidMin = bidMin;
-		this.bidMax = bidMax;
-		this.validity = validity;
-		this.merDate = merDate;
-		this.userType = userType;
-		this.cycMaxVal = cycMaxVal;
-		this.ipsAcctNo = ipsAcctNo;
-		this.signedType = signedType;
-		this.cycMinVal = cycMinVal;
-		s2SUrl = s2sUrl;
-	}
-	public AutoSignDTO(){}
-	public String webUrl;
-	public String merBillNo;
-	public String rateMin;
-	public String rateMax;
-	public String bidMin;
-	public String bidMax;
-	public String validity;
-	public String merDate;
-	public String userType;
-	public String cycMaxVal;
-	public String ipsAcctNo;
-	public String signedType;
-	public String cycMinVal;
-	public String s2SUrl;
-	@Override
-	public boolean validate(String merchantID) { //all checked
-		boolean result = true;
-		result = result && Validate.NotEmpty("merBillNo",merBillNo);
-		result = result && Validate.NotEmpty("merDate",merDate);
-		result = result && Validate.oneOrTwo("userType",userType);
-		result = result && Validate.NotEmpty("ipsAcctNo",ipsAcctNo);
-		
-		result = result && Validate.zeroOrOne("signedType",signedType);
-		result = result && Validate.NotEmpty("validity",validity);
-		result = result && Validate.NotEmpty("s2SUrl",s2SUrl);
-		result = result && Validate.NotEmpty("webUrl",webUrl);
-		return result;
-	}
+    public String webUrl;
+    public String merBillNo;
+    public String rateMin;
+    public String rateMax;
+    public String bidMin;
+    public String bidMax;
+    public String validity;
+    public String merDate;
+    public String userType;
+    public String cycMaxVal;
+    public String ipsAcctNo;
+    public String signedType;
+    public String cycMinVal;
+    public String s2SUrl;
+
+    public AutoSignDTO() {
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public String getMerBillNo() {
+        return merBillNo;
+    }
+
+    public void setMerBillNo(String merBillNo) {
+        this.merBillNo = merBillNo;
+    }
+
+    public String getRateMin() {
+        return rateMin;
+    }
+
+    public void setRateMin(String rateMin) {
+        this.rateMin = rateMin;
+    }
+
+    public String getRateMax() {
+        return rateMax;
+    }
+
+    public void setRateMax(String rateMax) {
+        this.rateMax = rateMax;
+    }
+
+    public String getBidMin() {
+        return bidMin;
+    }
+
+    public void setBidMin(String bidMin) {
+        this.bidMin = bidMin;
+    }
+
+    public String getBidMax() {
+        return bidMax;
+    }
+
+    public void setBidMax(String bidMax) {
+        this.bidMax = bidMax;
+    }
+
+    public String getValidity() {
+        return validity;
+    }
+
+    public void setValidity(String validity) {
+        this.validity = validity;
+    }
+
+    public String getMerDate() {
+        return merDate;
+    }
+
+    public void setMerDate(String merDate) {
+        this.merDate = merDate;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getCycMaxVal() {
+        return cycMaxVal;
+    }
+
+    public void setCycMaxVal(String cycMaxVal) {
+        this.cycMaxVal = cycMaxVal;
+    }
+
+    public String getIpsAcctNo() {
+        return ipsAcctNo;
+    }
+
+    public void setIpsAcctNo(String ipsAcctNo) {
+        this.ipsAcctNo = ipsAcctNo;
+    }
+
+    public String getSignedType() {
+        return signedType;
+    }
+
+    public void setSignedType(String signedType) {
+        this.signedType = signedType;
+    }
+
+    public String getCycMinVal() {
+        return cycMinVal;
+    }
+
+    public void setCycMinVal(String cycMinVal) {
+        this.cycMinVal = cycMinVal;
+    }
+
+    public String getS2SUrl() {
+        return s2SUrl;
+    }
+
+    public void setS2SUrl(String s2SUrl) {
+        this.s2SUrl = s2SUrl;
+    }
 }

@@ -2,8 +2,6 @@ package com.galaxy.moon.pp.controller.ips;
 
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
-import com.galaxy.moon.pp.biz.ips.DepositHandler;
-import com.galaxy.moon.pp.biz.ips.UserRegisterHandler;
 import com.galaxy.moon.pp.biz.ips.WithdrawHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,19 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/xhr/ips")
+@RequestMapping("/xhr/ips/withdraw")
 public class WithdrawController {
 
     @Autowired
     WithdrawHandler withdrawHandler;
 
     @ResponseBody
-    @RequestMapping("/withdraw")
+    @RequestMapping("/sign")
     public Result withDraw(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
         return withdrawHandler.withdraw(jsonObject, httpSession);
     }
 
-    @RequestMapping("/withdraw/inform")
+    @RequestMapping("/inform")
     public void inform(@RequestParam("resultCode") String resultCode,
                              @RequestParam("resultMsg") String resultMsg,
                              @RequestParam("merchantID") String merchantID,

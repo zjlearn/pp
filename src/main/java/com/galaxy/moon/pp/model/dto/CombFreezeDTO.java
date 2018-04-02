@@ -1,117 +1,91 @@
 package com.galaxy.moon.pp.model.dto;
 
 
-import com.galaxy.moon.pp.util.Validate;
+public class CombFreezeDTO {
 
-public class CombFreezeDTO implements RequestDTO {
-	public CombFreezeDTO(String projectNo, RedPacket redPacket, Bid bid,
-						 String webUrl, String merDate, String contractNo, String authNo,
-						 String regType, String s2sUrl) {
-		super();
-		this.projectNo = projectNo;
-		this.redPacket = redPacket;
-		this.bid = bid;
-		this.webUrl = webUrl;
-		this.merDate = merDate;
-		this.contractNo = contractNo;
-		this.authNo = authNo;
-		this.regType = regType;
-		s2SUrl = s2sUrl;
-	}
-	public CombFreezeDTO(){}
-	public String projectNo;
-	public RedPacket redPacket;
-	public Bid bid;
-	public String webUrl;
-	public String merDate;
-	public String contractNo;
-	public String authNo;
-	public String regType;
-	public String s2SUrl;
-	
-	@Override
-	public boolean validate(String merchantID) {  //part checked. handbook is unclear.
-		boolean result = true;
-		result = result && Validate.NotEmpty("projectNo", projectNo);
-		result = result && Validate.NotEmpty("merDate", merDate);
-		
-		result = result && Validate.oneOrTwo("regType", regType);
-		result = result && Validate.NotEmpty("s2SUrl", s2SUrl);
-		result = result && Validate.NotEmpty("webUrl", webUrl);
-		//for other type
-		
-		
-		//for redPacket
-		result = result && Validate.NotEmpty("s2SUrl", redPacket.merBillNo);
-		result = result && Validate.NotEmpty("redPacket.bizType", redPacket.bizType);
-		result = result && Validate.NotEmpty("redPacket.trdAmt", redPacket.trdAmt);
-		result = result && Validate.NotEmpty("redPacket.freezeMerType", redPacket.freezeMerType);
-		result = result && Validate.NotEmpty("redPacket.ipsAcctNo", redPacket.ipsAcctNo);
-		
-		//for biid
-		result = result && Validate.NotEmpty("bid.merBillNo", bid.merBillNo);
-		result = result && Validate.NotEmpty("bid.trdAmt", bid.trdAmt);
-		result = result && Validate.oneOrTwo("bid.bizType", bid.bizType);
-		
-		result = result && Validate.NotEmpty("bid.freezeMerType", bid.freezeMerType);
-		result = result && Validate.NotEmpty("bid.ipsAcctNo", bid.ipsAcctNo);
-		
-		return result;
-	}
-}
+    public String projectNo;
+    public RedPacketDTO redPacket;
+    public BidDTO bid;
+    public String webUrl;
+    public String merDate;
+    public String contractNo;
+    public String authNo;
+    public String regType;
+    public String s2SUrl;
 
+    public CombFreezeDTO() {
+    }
 
-class Bid{  
-	public String merFee;
-	public String merBillNo;
-	public String bizType;
-	public String otherIpsAcctNo;
-	public String freezeMerType;
-	public String trdAmt;
-	public String ipsAcctNo;
-	public Bid() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Bid(String merFee, String merBillNo, String bizType,
-			String otherIpsAcctNo, String freezeMerType, String trdAmt,
-			String ipsAcctNo) {
-		super();
-		this.merFee = merFee;
-		this.merBillNo = merBillNo;
-		this.bizType = bizType;
-		this.otherIpsAcctNo = otherIpsAcctNo;
-		this.freezeMerType = freezeMerType;
-		this.trdAmt = trdAmt;
-		this.ipsAcctNo = ipsAcctNo;
-	}
-}
+    public String getProjectNo() {
+        return projectNo;
+    }
 
-class RedPacket{
-	public String merFee;
-	public String merBillNo;
-	public String bizType;
-	public String otherIpsAcctNo;
-	public String freezeMerType;
-	public String trdAmt;
-	public String ipsAcctNo;
-	public String regType;
-	public RedPacket() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public RedPacket(String merFee, String merBillNo, String bizType,
-			String otherIpsAcctNo, String freezeMerType, String trdAmt,
-			String ipsAcctNo, String regType) {
-		super();
-		this.merFee = merFee;
-		this.merBillNo = merBillNo;
-		this.bizType = bizType;
-		this.otherIpsAcctNo = otherIpsAcctNo;
-		this.freezeMerType = freezeMerType;
-		this.trdAmt = trdAmt;
-		this.ipsAcctNo = ipsAcctNo;
-		this.regType = regType;
-	}
+    public void setProjectNo(String projectNo) {
+        this.projectNo = projectNo;
+    }
+
+    public RedPacketDTO getRedPacket() {
+        return redPacket;
+    }
+
+    public void setRedPacket(RedPacketDTO redPacket) {
+        this.redPacket = redPacket;
+    }
+
+    public BidDTO getBid() {
+        return bid;
+    }
+
+    public void setBid(BidDTO bid) {
+        this.bid = bid;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public String getMerDate() {
+        return merDate;
+    }
+
+    public void setMerDate(String merDate) {
+        this.merDate = merDate;
+    }
+
+    public String getContractNo() {
+        return contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    public String getAuthNo() {
+        return authNo;
+    }
+
+    public void setAuthNo(String authNo) {
+        this.authNo = authNo;
+    }
+
+    public String getRegType() {
+        return regType;
+    }
+
+    public void setRegType(String regType) {
+        this.regType = regType;
+    }
+
+    public String getS2SUrl() {
+        return s2SUrl;
+    }
+
+    public void setS2SUrl(String s2SUrl) {
+        this.s2SUrl = s2SUrl;
+    }
 }
 

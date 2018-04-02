@@ -1,17 +1,19 @@
 package com.galaxy.moon.pp.model.dto;
 
-
-public class UnFreezeDTO {
+/**
+ * create by zhangjun1 on 2018/4/2
+ */
+public class BidDTO {
     public String merFee;
     public String merBillNo;
-    public String projectNo;
     public String bizType;
-    public String webUrl;
-    public String merDate;
+    public String otherIpsAcctNo;
+    public String freezeMerType;
     public String trdAmt;
     public String ipsAcctNo;
-    public String freezeId;
-    public String s2SUrl;
+
+    public BidDTO() {
+    }
 
     public String getMerFee() {
         return merFee;
@@ -29,14 +31,6 @@ public class UnFreezeDTO {
         this.merBillNo = merBillNo;
     }
 
-    public String getProjectNo() {
-        return projectNo;
-    }
-
-    public void setProjectNo(String projectNo) {
-        this.projectNo = projectNo;
-    }
-
     public String getBizType() {
         return bizType;
     }
@@ -45,20 +39,20 @@ public class UnFreezeDTO {
         this.bizType = bizType;
     }
 
-    public String getWebUrl() {
-        return webUrl;
+    public String getOtherIpsAcctNo() {
+        return otherIpsAcctNo;
     }
 
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
+    public void setOtherIpsAcctNo(String otherIpsAcctNo) {
+        this.otherIpsAcctNo = otherIpsAcctNo;
     }
 
-    public String getMerDate() {
-        return merDate;
+    public String getFreezeMerType() {
+        return freezeMerType;
     }
 
-    public void setMerDate(String merDate) {
-        this.merDate = merDate;
+    public void setFreezeMerType(String freezeMerType) {
+        this.freezeMerType = freezeMerType;
     }
 
     public String getTrdAmt() {
@@ -75,21 +69,5 @@ public class UnFreezeDTO {
 
     public void setIpsAcctNo(String ipsAcctNo) {
         this.ipsAcctNo = ipsAcctNo;
-    }
-
-    public String getFreezeId() {
-        return freezeId;
-    }
-
-    public void setFreezeId(String freezeId) {
-        this.freezeId = freezeId;
-    }
-
-    public String getS2SUrl() {
-        return s2SUrl;
-    }
-
-    public void setS2SUrl(String s2SUrl) {
-        this.s2SUrl = s2SUrl;
     }
 }

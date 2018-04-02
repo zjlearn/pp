@@ -1,25 +1,10 @@
 package com.galaxy.moon.pp.model.dto;
 
 
-import com.galaxy.moon.pp.util.Validate;
-
 import java.util.List;
 
-public class TransferDTO implements RequestDTO {  //all checked
-	public TransferDTO(String isAutoRepayment, String transferType,
-					   String projectNo, String transferMode, String batchNo,
-					   String merDate, List<TransferAccDetail> transferAccDetail, String s2sUrl) {
-		super();
-		this.isAutoRepayment = isAutoRepayment;
-		this.transferType = transferType;
-		this.projectNo = projectNo;
-		this.transferMode = transferMode;
-		this.batchNo = batchNo;
-		this.merDate = merDate;
-		this.transferAccDetail = transferAccDetail;
-		s2SUrl = s2sUrl;
-	}
-	public TransferDTO(){}
+public class TransferDTO  {  //all checked
+
 	public String isAutoRepayment;
 	public String transferType;
 	public String projectNo;
@@ -28,59 +13,72 @@ public class TransferDTO implements RequestDTO {  //all checked
 	public String merDate;
 	public List<TransferAccDetail> transferAccDetail;
 	public String s2SUrl;
-	@Override
-	public boolean validate(String merchantID) {
-		boolean result = true;
-		result = result && Validate.NotEmpty("batchNo", batchNo);
-		result = result && Validate.NotEmpty("merDate", merDate);
-		result = result && Validate.NotEmpty("projectNo", projectNo);
-		if(Validate.NotEmpty("transferType", transferType)){ //
-			if(Integer.valueOf(transferType)>=0 && Integer.valueOf(transferType)<=9)
-				;
-			else
-				System.out.println("transferTypeȡֵֻ��Ϊ1-9 ");
-		}else{  //
-			;
-		}
-		result = result && Validate.oneOrTwo("transferMode", transferMode);
-		for(TransferAccDetail  accDetail : transferAccDetail)
-			result = result && accDetail.validate();
-		return result;
+
+	public TransferDTO() {
+	}
+
+	public String getIsAutoRepayment() {
+		return isAutoRepayment;
+	}
+
+	public void setIsAutoRepayment(String isAutoRepayment) {
+		this.isAutoRepayment = isAutoRepayment;
+	}
+
+	public String getTransferType() {
+		return transferType;
+	}
+
+	public void setTransferType(String transferType) {
+		this.transferType = transferType;
+	}
+
+	public String getProjectNo() {
+		return projectNo;
+	}
+
+	public void setProjectNo(String projectNo) {
+		this.projectNo = projectNo;
+	}
+
+	public String getTransferMode() {
+		return transferMode;
+	}
+
+	public void setTransferMode(String transferMode) {
+		this.transferMode = transferMode;
+	}
+
+	public String getBatchNo() {
+		return batchNo;
+	}
+
+	public void setBatchNo(String batchNo) {
+		this.batchNo = batchNo;
+	}
+
+	public String getMerDate() {
+		return merDate;
+	}
+
+	public void setMerDate(String merDate) {
+		this.merDate = merDate;
+	}
+
+	public List<TransferAccDetail> getTransferAccDetail() {
+		return transferAccDetail;
+	}
+
+	public void setTransferAccDetail(List<TransferAccDetail> transferAccDetail) {
+		this.transferAccDetail = transferAccDetail;
+	}
+
+	public String getS2SUrl() {
+		return s2SUrl;
+	}
+
+	public void setS2SUrl(String s2SUrl) {
+		this.s2SUrl = s2SUrl;
 	}
 }
 
-class TransferAccDetail{
-	public TransferAccDetail() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public TransferAccDetail(String outMerFee, String merBillNo, String outIpsAcctNo,
-			String inIpsAcctNo, String trdAmt, String freezeId, String inMerFee) {
-		super();
-		this.outMerFee = outMerFee;
-		this.merBillNo = merBillNo;
-		this.outIpsAcctNo = outIpsAcctNo;
-		this.inIpsAcctNo = inIpsAcctNo;
-		this.trdAmt = trdAmt;
-		this.freezeId = freezeId;
-		this.inMerFee = inMerFee;
-	}
-	public String outMerFee;
-	public String merBillNo;
-	public String outIpsAcctNo;
-	public String inIpsAcctNo;
-	public String trdAmt;
-	public String freezeId;
-	public String inMerFee;
-	
-	public boolean validate(){  //������֤TransferAccDetail����ȷ��
-		
-		boolean result = true;
-		result= result&& Validate.NotEmpty("merBillNo", merBillNo);
-		result= result&& Validate.NotEmpty("freezeId", freezeId);
-		result= result&& Validate.NotEmpty("outIpsAcctNo", outIpsAcctNo);
-		result= result&& Validate.NotEmpty("trdAmt", trdAmt);
-		return result;
-	}
-	
-}

@@ -1,12 +1,10 @@
 package com.galaxy.moon.pp.model.dto;
 
 
-import com.galaxy.moon.pp.util.Validate;
-
 /*
  * 这个是用户添加的请求报文
  */
-public class UserRegisterDTO implements RequestDTO {
+public class UserRegisterDTO  {
 
     public String userName;
     public String merBillNo;
@@ -24,34 +22,6 @@ public class UserRegisterDTO implements RequestDTO {
     private String userRole;
 
     public UserRegisterDTO() {
-    }
-
-    /*
-     * validate every
-     */
-    public boolean validate(String merchantID) {  //all checked
-        boolean result = true;
-        result = result && Validate.NotEmpty("merBillNo", merBillNo);
-        result = result && Validate.NotEmpty("merDate", merDate);
-        result = result && Validate.oneOrTwo("userType", userType);
-        result = result && Validate.oneOrTwo("bizType", bizType);
-
-        result = result && Validate.NotEmpty("userName", userName);
-        result = result && Validate.NotEmpty("mobileNo", mobileNo);
-        result = result && Validate.NotEmpty("identNo", identNo);
-        result = result && Validate.oneOrTwo("bizType", bizType);
-        result = result && Validate.zeroOrOne("isAssureCom", isAssureCom);
-
-        result = result && Validate.NotEmpty("s2SUrl", s2SUrl);
-        result = result && Validate.NotEmpty("webUrl", webUrl);
-
-        if (userType.equals("2")) { //�û�����Ϊ��ҵ
-            if (enterName.isEmpty() || orgCode.isEmpty()) {
-                System.out.println("");
-                result = false;
-            }
-        }
-        return result;
     }
 
     public String getUserName() {

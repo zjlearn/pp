@@ -1,41 +1,36 @@
 package com.galaxy.moon.pp.model.dto;
 
 
-import com.galaxy.moon.pp.util.Validate;
-
-public class CommonQueryDTO implements RequestDTO {
+public class CommonQueryDTO  {
 
     public String merBillNo;
     public String queryType;
     public String ipsAcctNo;
 
-    public CommonQueryDTO(String merBillNo, String queryType, String ipsAcctNo) {
-        super();
-        this.merBillNo = merBillNo;
-        this.queryType = queryType;
-        this.ipsAcctNo = ipsAcctNo;
-    }
-
     public CommonQueryDTO() {
     }
 
-    @Override
-    public boolean validate(String merchantID) {  // all checked
-        boolean result = true;
-        result = result && Validate.NotEmpty("ipsAcctNo", ipsAcctNo);
-        try {
-            if (Integer.valueOf(queryType) >= 0 && Integer.valueOf(queryType) <= 3)
-                ;
-            else {
-                System.out.println("queryType��ֵֻ��Ϊ1-3");
-                result = false;
-            }
-            if (queryType.equals("2") || queryType.equals("02"))
-                result = result && Validate.NotEmpty("merBillNo", merBillNo);
+    public String getMerBillNo() {
+        return merBillNo;
+    }
 
-        } catch (Exception e) {
-            System.out.println("query ��ֵ����ȷ");
-        }
-        return result;
+    public void setMerBillNo(String merBillNo) {
+        this.merBillNo = merBillNo;
+    }
+
+    public String getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
+    }
+
+    public String getIpsAcctNo() {
+        return ipsAcctNo;
+    }
+
+    public void setIpsAcctNo(String ipsAcctNo) {
+        this.ipsAcctNo = ipsAcctNo;
     }
 }
