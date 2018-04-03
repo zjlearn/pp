@@ -3,6 +3,8 @@ package com.galaxy.moon.pp.biz.ips;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.LoggerName;
+import com.galaxy.moon.pp.model.OpenAccountBill;
+import com.galaxy.moon.pp.model.User;
 import com.galaxy.moon.pp.service.OpenAccountService;
 import com.galaxy.moon.pp.service.UserService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
@@ -22,8 +24,6 @@ public class S2SHandler {
 
     @Autowired
     OpenAccountService openAccountService;
-
-
 
     private final Logger logger = LoggerFactory.getLogger(LoggerName.S2S_LOGGER);
 
@@ -48,9 +48,16 @@ public class S2SHandler {
             String ipsDoTime = jsonObject.getString("ipsDoTime");
             String ipsAcctNo = jsonObject.getString("ipsAcctNo");
             String status = jsonObject.getString("status");
-            System.out.println("接收到ips的s2s通知如下： ");
-
             logger.info("接收到异步的s2s消息成功，信息如下：" + jsonObject);
+            OpenAccountBill openAccountBill = openAccountService.selectByBillNo(merBillNo);
+            if (openAccountBill != null) {
+                long userId = openAccountBill.getUserId();
+                User user = new User();
+                user.setIpsAccount(ipsAcctNo);
+                int rtn = userService.updateByUserId(user);
+            } else {
+
+            }
         } catch (Exception e) {
             logger.error("接收到异步的s2s消息解析失败");
             e.printStackTrace();
@@ -206,7 +213,6 @@ public class S2SHandler {
         }
         return IPSCONSTANTS.S2S_SCUESSCODE;
     }
-
 
 
 }

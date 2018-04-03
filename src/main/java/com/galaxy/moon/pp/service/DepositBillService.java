@@ -1,8 +1,12 @@
-package com.galaxy.moon.pp.dao;
+package com.galaxy.moon.pp.service;
 
 import com.galaxy.moon.pp.model.DepositBill;
 
-public interface DepositBillMapper {
+/**
+ * create by zhangjun1 on 2018/4/3
+ */
+public interface DepositBillService {
+
     int deleteByPrimaryKey(Long id);
 
     int insert(DepositBill record);
