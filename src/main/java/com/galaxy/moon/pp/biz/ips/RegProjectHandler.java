@@ -4,10 +4,15 @@ package com.galaxy.moon.pp.biz.ips;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
+import com.galaxy.moon.common.util.DateUtil;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
+import com.galaxy.moon.pp.model.Product;
+import com.galaxy.moon.pp.model.RateTypeEnum;
 import com.galaxy.moon.pp.model.User;
 import com.galaxy.moon.pp.model.dto.CloseAccountDTO;
+import com.galaxy.moon.pp.model.dto.RegProjectDTO;
 import com.galaxy.moon.pp.service.BillIdService;
+import com.galaxy.moon.pp.service.ProductService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +27,9 @@ public class RegProjectHandler {
     @Autowired
     BillIdService billIdService;
 
+    @Autowired
+    ProductService productService;
+
     /**
      * fixme 完成剩余的事情
      * @param jsonObject
@@ -30,7 +38,32 @@ public class RegProjectHandler {
      */
     public Result sign(JSONObject jsonObject, HttpSession httpSession) {
         try {
-            return ResultGenerator.genSuccessResult();
+            long  productId= jsonObject.getLong("productId");
+            Product product = productService.selectByPrimaryKey(productId);
+            String billNo =billIdService.nextStrId();
+            RegProjectDTO regProjectDTO = new RegProjectDTO();
+            regProjectDTO.setMerBillNo(billNo);
+            regProjectDTO.setMerDate(DateUtil.parseLongToString(System.currentTimeMillis(), DateUtil.defaultDatePattern));
+            regProjectDTO.setProjectNo(product.getProductNo());
+            regProjectDTO.setProjectName(product.getProductName());
+            regProjectDTO.setProjectType("1");
+            regProjectDTO.setProjectAmt(product.getAmount());
+            regProjectDTO.setRateType(RateTypeEnum.FIXED.type);
+            regProjectDTO.setRateVal(product.getRateReturn());
+            regProjectDTO.setCycVal(product.getDuration());
+            //fixme 修改融资方的信息
+            regProjectDTO.setFinaAccType("1");
+            regProjectDTO.setFinaCertNo("");
+            regProjectDTO.setFinaName("");
+            regProjectDTO.setFinaIpsAcctNo("");
+            regProjectDTO.setIsExcess("0");
+            //fixme 设置自动投标的信息
+            regProjectDTO.setAutoTender("");
+
+            String reqStr = JSONObject.toJSONString(regProjectDTO);
+
+            JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "project.regProject", reqStr);
+            return ResultGenerator.genSuccessResult(result);
         } catch (Exception e) {
             return ResultGenerator.genFailResult();
         }

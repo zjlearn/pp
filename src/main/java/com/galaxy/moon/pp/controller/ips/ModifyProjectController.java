@@ -1,5 +1,7 @@
 package com.galaxy.moon.pp.controller.ips;
 
+import com.galaxy.moon.common.Result;
+import com.galaxy.moon.common.ResultGenerator;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -8,4 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ModifyProjectController {
+
+    public Result modify(){
+        return ResultGenerator.genFailResult();
+    }
 }

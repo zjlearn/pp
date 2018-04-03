@@ -7,6 +7,7 @@ import com.galaxy.moon.pp.biz.ips.RegProjectHandler;
 import com.galaxy.moon.pp.biz.ips.UserRegisterHandler;
 import com.galaxy.moon.pp.model.IpsRequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * create by zhangjun1 on 2018/1/20
  */
-@RestController
+@Controller
 @RequestMapping("/xhr/ips/regProject")
 public class regProjectController {
     @Autowired
