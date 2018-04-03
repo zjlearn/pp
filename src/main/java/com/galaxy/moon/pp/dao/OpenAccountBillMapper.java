@@ -14,4 +14,6 @@ public interface OpenAccountBillMapper {
     int updateByPrimaryKeySelective(OpenAccountBill record);
 
     int updateByPrimaryKey(OpenAccountBill record);
+
+    OpenAccountBill selectByBillNo(String billNo);
 }

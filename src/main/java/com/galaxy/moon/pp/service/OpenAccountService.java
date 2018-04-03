@@ -1,4 +1,13 @@
 package com.galaxy.moon.pp.service;
 
-public class OpenAccountService {
+import com.galaxy.moon.pp.model.OpenAccountBill;
+
+public interface OpenAccountService {
+    int insert(OpenAccountBill record);
+
+    int insertSelective(OpenAccountBill record);
+
+    OpenAccountBill selectByPrimaryKey(Long id);
+
+    OpenAccountBill selectByBillNo(String billNo);
 }

@@ -3,6 +3,7 @@ package com.galaxy.moon.pp.biz.ips;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.LoggerName;
+import com.galaxy.moon.pp.service.OpenAccountService;
 import com.galaxy.moon.pp.service.UserService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.slf4j.Logger;
@@ -18,6 +19,11 @@ public class S2SHandler {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    OpenAccountService openAccountService;
+
+
 
     private final Logger logger = LoggerFactory.getLogger(LoggerName.S2S_LOGGER);
 
