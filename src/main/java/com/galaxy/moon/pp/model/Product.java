@@ -5,15 +5,23 @@ import java.util.Date;
 public class Product {
     private Long id;
 
+    private String productNo;
+
     private String productName;
 
     private Integer productType;
 
     private Integer productDetailId;
 
-    private Integer amount;
+    private Double amount;
+
+    private Integer rateType;
 
     private Double rateReturn;
+
+    private Double rateMin;
+
+    private Double rateMax;
 
     private Integer duration;
 
@@ -65,11 +73,11 @@ public class Product {
         this.productDetailId = productDetailId;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -151,5 +159,37 @@ public class Product {
 
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public String getProductNo() {
+        return productNo;
+    }
+
+    public void setProductNo(String productNo) {
+        this.productNo = productNo;
+    }
+
+    public Integer getRateType() {
+        return rateType;
+    }
+
+    public void setRateType(Integer rateType) {
+        this.rateType = rateType;
+    }
+
+    public Double getRateMin() {
+        return rateMin;
+    }
+
+    public void setRateMin(Double rateMin) {
+        this.rateMin = rateMin;
+    }
+
+    public Double getRateMax() {
+        return rateMax;
+    }
+
+    public void setRateMax(Double rateMax) {
+        this.rateMax = rateMax;
     }
 }

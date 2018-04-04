@@ -14,11 +14,15 @@ public class RegProjectDTO {
     public String merDate;
     public String rateMaxVal;
     public String rateMinVal;
-    public String cycVal;
+    public Integer cycVal;
     public String finaAccType;
     public String finaCertNo;
-    public String rateVal;
-    public String projectAmt;
+    public Double rateVal;
+    public Double projectAmt;
+    private String autoTender;
+    private Integer repaymentNumber;
+    private double closingCost;
+    private  String webUrl;
     public String s2SUrl;
 
     public RegProjectDTO() {
@@ -120,11 +124,11 @@ public class RegProjectDTO {
         this.rateMinVal = rateMinVal;
     }
 
-    public String getCycVal() {
+    public Integer getCycVal() {
         return cycVal;
     }
 
-    public void setCycVal(String cycVal) {
+    public void setCycVal(Integer cycVal) {
         this.cycVal = cycVal;
     }
 
@@ -144,19 +148,20 @@ public class RegProjectDTO {
         this.finaCertNo = finaCertNo;
     }
 
-    public String getRateVal() {
+    public Double getRateVal() {
         return rateVal;
     }
 
-    public void setRateVal(String rateVal) {
+    public void setRateVal(Double rateVal) {
         this.rateVal = rateVal;
     }
 
-    public String getProjectAmt() {
+
+    public Double getProjectAmt() {
         return projectAmt;
     }
 
-    public void setProjectAmt(String projectAmt) {
+    public void setProjectAmt(Double projectAmt) {
         this.projectAmt = projectAmt;
     }
 
@@ -166,5 +171,37 @@ public class RegProjectDTO {
 
     public void setS2SUrl(String s2SUrl) {
         this.s2SUrl = s2SUrl;
+    }
+
+    public String getAutoTender() {
+        return autoTender;
+    }
+
+    public void setAutoTender(String autoTender) {
+        this.autoTender = autoTender;
+    }
+
+    public Integer getRepaymentNumber() {
+        return repaymentNumber;
+    }
+
+    public void setRepaymentNumber(Integer repaymentNumber) {
+        this.repaymentNumber = repaymentNumber;
+    }
+
+    public double getClosingCost() {
+        return closingCost;
+    }
+
+    public void setClosingCost(double closingCost) {
+        this.closingCost = closingCost;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
     }
 }
