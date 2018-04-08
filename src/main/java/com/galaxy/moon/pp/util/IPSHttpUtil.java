@@ -4,7 +4,7 @@ package com.galaxy.moon.pp.util;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.netework.HttpManager;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
-import com.galaxy.moon.pp.model.IpsResponse;
+import com.galaxy.moon.pp.model.bean.IpsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;

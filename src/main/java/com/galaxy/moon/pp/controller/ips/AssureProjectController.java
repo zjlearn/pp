@@ -1,11 +1,10 @@
-package com.galaxy.moon.pp.controller;
+package com.galaxy.moon.pp.controller.ips;
 
 import com.alibaba.fastjson.JSON;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
-import com.galaxy.moon.pp.model.IpsResponse;
-import com.galaxy.moon.pp.model.IpsRequestParam;
+import com.galaxy.moon.pp.model.bean.IpsResponse;
 import com.galaxy.moon.pp.model.dto.AssureProjectDTO;
 import com.galaxy.moon.pp.util.IPSHttpUtil;
 import com.galaxy.moon.pp.util.IPSOperationTypeEnum;

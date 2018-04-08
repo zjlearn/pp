@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.service.impl;
 
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

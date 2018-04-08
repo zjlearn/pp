@@ -6,13 +6,11 @@ import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
 import com.galaxy.moon.common.util.DateUtil;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
-import com.galaxy.moon.pp.model.Product;
 import com.galaxy.moon.pp.model.RateTypeEnum;
-import com.galaxy.moon.pp.model.User;
-import com.galaxy.moon.pp.model.dto.CloseAccountDTO;
+import com.galaxy.moon.pp.model.bean.Project;
 import com.galaxy.moon.pp.model.dto.RegProjectDTO;
 import com.galaxy.moon.pp.service.BillIdService;
-import com.galaxy.moon.pp.service.ProductService;
+import com.galaxy.moon.pp.service.ProjectService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +26,7 @@ public class RegProjectHandler {
     BillIdService billIdService;
 
     @Autowired
-    ProductService productService;
+    ProjectService productService;
 
     /**
      * fixme 完成剩余的事情
@@ -39,18 +37,18 @@ public class RegProjectHandler {
     public Result sign(JSONObject jsonObject, HttpSession httpSession) {
         try {
             long  productId= jsonObject.getLong("productId");
-            Product product = productService.selectByPrimaryKey(productId);
+            Project project = productService.selectByPrimaryKey(productId);
             String billNo =billIdService.nextStrId();
             RegProjectDTO regProjectDTO = new RegProjectDTO();
             regProjectDTO.setMerBillNo(billNo);
             regProjectDTO.setMerDate(DateUtil.parseLongToString(System.currentTimeMillis(), DateUtil.defaultDatePattern));
-            regProjectDTO.setProjectNo(product.getProductNo());
-            regProjectDTO.setProjectName(product.getProductName());
+            regProjectDTO.setProjectNo(project.getProjectNo());
+            regProjectDTO.setProjectName(project.getProjectName());
             regProjectDTO.setProjectType("1");
-            regProjectDTO.setProjectAmt(product.getAmount());
+            regProjectDTO.setProjectAmt(project.getAmount().doubleValue()  );
             regProjectDTO.setRateType(RateTypeEnum.FIXED.type);
-            regProjectDTO.setRateVal(product.getRateReturn());
-            regProjectDTO.setCycVal(product.getDuration());
+            regProjectDTO.setRateVal(project.getRateReturn());
+            regProjectDTO.setCycVal(project.getDuration());
             //fixme 修改融资方的信息
             regProjectDTO.setFinaAccType("1");
             regProjectDTO.setFinaCertNo("");

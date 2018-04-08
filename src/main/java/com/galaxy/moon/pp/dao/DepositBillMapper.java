@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.dao;
 
-import com.galaxy.moon.pp.model.DepositBill;
+import com.galaxy.moon.pp.model.bean.DepositBill;
 
 public interface DepositBillMapper {
     int deleteByPrimaryKey(Long id);

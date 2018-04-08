@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.dao;
 
-import com.galaxy.moon.pp.model.OpenAccountBill;
+import com.galaxy.moon.pp.model.bean.OpenAccountBill;
 
 public interface OpenAccountBillMapper {
     int deleteByPrimaryKey(Long id);

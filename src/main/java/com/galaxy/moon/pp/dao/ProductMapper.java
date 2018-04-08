@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.dao;
 
-import com.galaxy.moon.pp.model.Product;
+import com.galaxy.moon.pp.model.bean.Product;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Long id);

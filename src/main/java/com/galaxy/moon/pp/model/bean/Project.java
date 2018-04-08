@@ -1,27 +1,22 @@
-package com.galaxy.moon.pp.model;
+package com.galaxy.moon.pp.model.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
+public class Project {
     private Long id;
 
-    private String productNo;
+    private String projectNo;
 
-    private String productName;
+    private String projectName;
 
-    private Integer productType;
+    private Integer projectType;
 
-    private Integer productDetailId;
+    private Integer projectDetailId;
 
-    private Double amount;
-
-    private Integer rateType;
+    private BigDecimal amount;
 
     private Double rateReturn;
-
-    private Double rateMin;
-
-    private Double rateMax;
 
     private Integer duration;
 
@@ -49,35 +44,35 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
+    public void setProjectName(String projectName) {
+        this.projectName = projectName == null ? null : projectName.trim();
     }
 
-    public Integer getProductType() {
-        return productType;
+    public Integer getProjectType() {
+        return projectType;
     }
 
-    public void setProductType(Integer productType) {
-        this.productType = productType;
+    public void setProjectType(Integer projectType) {
+        this.projectType = projectType;
     }
 
-    public Integer getProductDetailId() {
-        return productDetailId;
+    public Integer getProjectDetailId() {
+        return projectDetailId;
     }
 
-    public void setProductDetailId(Integer productDetailId) {
-        this.productDetailId = productDetailId;
+    public void setProjectDetailId(Integer projectDetailId) {
+        this.projectDetailId = projectDetailId;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -161,35 +156,11 @@ public class Product {
         this.deleteFlag = deleteFlag;
     }
 
-    public String getProductNo() {
-        return productNo;
+    public String getProjectNo() {
+        return projectNo;
     }
 
-    public void setProductNo(String productNo) {
-        this.productNo = productNo;
-    }
-
-    public Integer getRateType() {
-        return rateType;
-    }
-
-    public void setRateType(Integer rateType) {
-        this.rateType = rateType;
-    }
-
-    public Double getRateMin() {
-        return rateMin;
-    }
-
-    public void setRateMin(Double rateMin) {
-        this.rateMin = rateMin;
-    }
-
-    public Double getRateMax() {
-        return rateMax;
-    }
-
-    public void setRateMax(Double rateMax) {
-        this.rateMax = rateMax;
+    public void setProjectNo(String projectNo) {
+        this.projectNo = projectNo;
     }
 }

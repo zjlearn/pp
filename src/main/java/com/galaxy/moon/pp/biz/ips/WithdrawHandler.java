@@ -7,7 +7,7 @@ import com.galaxy.moon.common.util.DateUtil;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.IPSFeeTypeEnum;
 import com.galaxy.moon.pp.model.MerFeeTypeEnum;
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.model.UserTypeEnum;
 import com.galaxy.moon.pp.model.dto.WithDrawDTO;
 import com.galaxy.moon.pp.service.BillIdService;

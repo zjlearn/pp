@@ -73,7 +73,6 @@
         <appender-ref ref="s2sAppender_ASYNC"/>
     </logger>
 
-
     <!-- Root Logger -->
     <root level="${log.level}">
         <appender-ref ref="STDOUT" />

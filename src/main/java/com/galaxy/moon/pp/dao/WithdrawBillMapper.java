@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.dao;
 
-import com.galaxy.moon.pp.model.WithdrawBill;
+import com.galaxy.moon.pp.model.bean.WithdrawBill;
 
 public interface WithdrawBillMapper {
     int deleteByPrimaryKey(Long id);

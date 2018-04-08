@@ -6,7 +6,7 @@ import com.galaxy.moon.common.ResultGenerator;
 import com.galaxy.moon.common.util.DateUtil;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.controller.ips.UserRegisterController;
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.model.dto.UserRegisterDTO;
 import com.galaxy.moon.pp.service.BillIdService;
 import com.galaxy.moon.pp.service.UserService;

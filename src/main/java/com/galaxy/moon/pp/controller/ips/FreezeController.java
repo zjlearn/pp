@@ -2,6 +2,7 @@ package com.galaxy.moon.pp.controller.ips;
 
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
+import com.galaxy.moon.pp.biz.ips.FreezeHandler;
 import com.galaxy.moon.pp.biz.ips.RegProjectHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,15 +19,15 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/xhr/ips/freeze")
-public class freezeController {
+public class FreezeController {
 
     @Autowired
-    RegProjectHandler regProjectHandler;
+    FreezeHandler freezeHandler;
 
     @ResponseBody
     @RequestMapping("/sign")
     public Result sign(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
-        return regProjectHandler.sign(jsonObject, httpSession);
+        return freezeHandler.sign(jsonObject, httpSession);
     }
 
     @RequestMapping("/inform")
@@ -35,6 +36,6 @@ public class freezeController {
                        @RequestParam("merchantID") String merchantID,
                        @RequestParam("sign") String sign,
                        @RequestParam("response") String response, HttpServletResponse httpResponse) {
-        regProjectHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
+        freezeHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
     }
 }

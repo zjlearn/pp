@@ -1,7 +1,7 @@
 package com.galaxy.moon.pp.service.impl;
 
 import com.galaxy.moon.pp.dao.DepositBillMapper;
-import com.galaxy.moon.pp.model.DepositBill;
+import com.galaxy.moon.pp.model.bean.DepositBill;
 import com.galaxy.moon.pp.service.DepositBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

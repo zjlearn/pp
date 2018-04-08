@@ -2,7 +2,7 @@ package com.galaxy.moon.pp.biz;
 
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

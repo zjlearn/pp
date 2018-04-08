@@ -1,7 +1,7 @@
 package com.galaxy.moon.pp.service.impl;
 
 import com.galaxy.moon.pp.dao.UserMapper;
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

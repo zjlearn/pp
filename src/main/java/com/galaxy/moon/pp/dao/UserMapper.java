@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.dao;
 
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);

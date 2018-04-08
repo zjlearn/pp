@@ -3,8 +3,8 @@ package com.galaxy.moon.pp.biz.ips;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.LoggerName;
-import com.galaxy.moon.pp.model.OpenAccountBill;
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.OpenAccountBill;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.service.OpenAccountService;
 import com.galaxy.moon.pp.service.UserService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
@@ -37,7 +37,7 @@ public class S2SHandler {
      * @param response
      * @return
      */
-    public String userRegister(String resultCode, String resultMsg, String merchantID, String sign, String response) {
+    public String  userRegister(String resultCode, String resultMsg, String merchantID, String sign, String response) {
         if (resultCode.equals(IPSCONSTANTS.RESPONSE_FAIL_CODE)) {
             logger.error("用户开户失败");
         }
