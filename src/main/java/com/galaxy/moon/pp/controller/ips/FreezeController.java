@@ -3,10 +3,6 @@ package com.galaxy.moon.pp.controller.ips;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.pp.biz.ips.FreezeHandler;
-<<<<<<< HEAD
-=======
-import com.galaxy.moon.pp.biz.ips.RegProjectHandler;
->>>>>>> 783c95f773004652baf837608f1d5a34dcb576de
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,5 +37,4 @@ public class FreezeController {
                        @RequestParam("response") String response, HttpServletResponse httpResponse) {
         freezeHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
     }
-
 }
