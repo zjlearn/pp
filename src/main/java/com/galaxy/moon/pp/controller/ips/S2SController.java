@@ -38,4 +38,14 @@ public class S2SController {
         System.out.println("接收到ips的s2s相应通知");
         return s2SHandler.closeAccount(resultCode, resultMsg, merchantID, sign, response);
     }
+
+    @RequestMapping("/s2s")
+    public String notice(@RequestParam("resultCode") String resultCode,
+                         @RequestParam("resultMsg") String resultMsg,
+                         @RequestParam("merchantID") String merchantID,
+                         @RequestParam("sign") String sign,
+                         @RequestParam("response") String response) {
+
+        return IpsRequestParam.scuessCode;
+    }
 }

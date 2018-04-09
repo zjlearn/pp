@@ -1,7 +1,7 @@
 package com.galaxy.moon.pp.controller;
 
 
-import com.galaxy.moon.pp.model.Product;
+import com.galaxy.moon.pp.model.bean.Project;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +13,9 @@ import java.util.List;
  * 产品相关的
  */
 @RestController
-public class ProductController {
+public class ProjectController {
     @RequestMapping("/list")
-    public List<Product> listProducts(){
+    public List<Project> listProducts(){
         return new ArrayList<>();
     }
 }

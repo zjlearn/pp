@@ -2,35 +2,30 @@ package com.galaxy.moon.pp.controller.ips;
 
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
+import com.galaxy.moon.pp.biz.ips.CombFreezeHandler;
 import com.galaxy.moon.pp.biz.ips.FreezeHandler;
-<<<<<<< HEAD
-=======
-import com.galaxy.moon.pp.biz.ips.RegProjectHandler;
->>>>>>> 783c95f773004652baf837608f1d5a34dcb576de
+import com.galaxy.moon.pp.model.IpsRequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * create by zhangjun1 on 2018/4/3
+ * create by zhangjun1 on 2018/1/20
+ * 红包组合冻结接口
  */
 @Controller
-@RequestMapping("/xhr/ips/freeze")
-public class FreezeController {
-
+@RequestMapping("/xhr/ips/combFree")
+public class CombFreezeController {
     @Autowired
-    FreezeHandler freezeHandler;
+    CombFreezeHandler  combFreezeHandler;
 
     @ResponseBody
     @RequestMapping("/sign")
     public Result sign(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
-        return freezeHandler.sign(jsonObject, httpSession);
+        return combFreezeHandler.sign(jsonObject, httpSession);
     }
 
     @RequestMapping("/inform")
@@ -39,7 +34,6 @@ public class FreezeController {
                        @RequestParam("merchantID") String merchantID,
                        @RequestParam("sign") String sign,
                        @RequestParam("response") String response, HttpServletResponse httpResponse) {
-        freezeHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
+        combFreezeHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
     }
-
 }

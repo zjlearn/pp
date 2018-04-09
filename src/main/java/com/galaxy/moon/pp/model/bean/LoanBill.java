@@ -1,17 +1,17 @@
-package com.galaxy.moon.pp.model;
+package com.galaxy.moon.pp.model.bean;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * create by zhangjun1 on 2017/12/20
- * 代表其关联的
+ * 代表用户投资的单据。 主要有用户
  */
 public class LoanBill {
     private Long id;
     private Long userId;
     private String userName;
-    private Long productId;   // 关联的产品Id
+    private String mobile;
+    private Long projectId;   // 关联的产品Id
     private Long loanAmount;
     private BigDecimal expectRate; // 预期的利率
     private Integer loanType;  // 借款类型，与产品类型不同
@@ -67,12 +67,12 @@ public class LoanBill {
         this.userName = userName;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public Long getLoanAmount() {
@@ -129,5 +129,13 @@ public class LoanBill {
 
     public void setStatusRemark(String statusRemark) {
         this.statusRemark = statusRemark;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

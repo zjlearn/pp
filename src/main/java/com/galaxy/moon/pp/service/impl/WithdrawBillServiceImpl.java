@@ -1,7 +1,7 @@
 package com.galaxy.moon.pp.service.impl;
 
 import com.galaxy.moon.pp.dao.WithdrawBillMapper;
-import com.galaxy.moon.pp.model.WithdrawBill;
+import com.galaxy.moon.pp.model.bean.WithdrawBill;
 import com.galaxy.moon.pp.service.WithdrawBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 

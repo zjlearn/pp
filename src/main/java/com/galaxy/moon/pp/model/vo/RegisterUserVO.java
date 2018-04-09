@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.model.vo;
 
-import com.galaxy.moon.pp.model.User;
+import com.galaxy.moon.pp.model.bean.User;
 
 /**
  * create by zhangjun1 on 2018/1/20

@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.service;
 
-import com.galaxy.moon.pp.model.DepositBill;
+import com.galaxy.moon.pp.model.bean.DepositBill;
 
 /**
  * create by zhangjun1 on 2018/4/3

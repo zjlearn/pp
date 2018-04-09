@@ -1,4 +1,4 @@
-package com.galaxy.moon.pp.model;
+package com.galaxy.moon.pp.model.bean;
 
 /**
  * create by zhangjun1 on 2018/1/20

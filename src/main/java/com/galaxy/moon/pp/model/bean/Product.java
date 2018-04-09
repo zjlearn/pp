@@ -1,11 +1,15 @@
-package com.galaxy.moon.pp.model;
+package com.galaxy.moon.pp.model.bean;
 
-public class OpenAccountBill {
+import java.math.BigDecimal;
+
+public class Product {
     private Long id;
 
     private String billNo;
 
     private Long userId;
+
+    private BigDecimal amount;
 
     private Byte status;
 
@@ -33,6 +37,14 @@ public class OpenAccountBill {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Byte getStatus() {

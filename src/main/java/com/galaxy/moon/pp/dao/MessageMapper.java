@@ -1,6 +1,6 @@
 package com.galaxy.moon.pp.dao;
 
-import com.galaxy.moon.pp.model.Message;
+import com.galaxy.moon.pp.model.bean.Message;
 
 public interface MessageMapper {
     int deleteByPrimaryKey(Long id);

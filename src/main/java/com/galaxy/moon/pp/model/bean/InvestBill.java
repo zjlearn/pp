@@ -1,4 +1,4 @@
-package com.galaxy.moon.pp.model;
+package com.galaxy.moon.pp.model.bean;
 
 import java.math.BigDecimal;
 

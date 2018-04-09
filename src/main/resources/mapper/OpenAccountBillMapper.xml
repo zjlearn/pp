@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.galaxy.moon.pp.dao.OpenAccountBillMapper">
-    <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.OpenAccountBill">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="billNo" jdbcType="VARCHAR" property="billNo"/>
-        <result column="userId" jdbcType="BIGINT" property="userId"/>
-        <result column="status" jdbcType="TINYINT" property="status"/>
-        <result column="createTime" jdbcType="BIGINT" property="createTime"/>
-    </resultMap>
+
     <sql id="Base_Column_List">
     id, billNo, userId, status, createTime
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.galaxy.moon.pp.model.bean.OpenAccountBill">
         select
         <include refid="Base_Column_List"/>
         from tb_open_account_bill
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="selectByBillNo" resultType="com.galaxy.moon.pp.model.OpenAccountBill">
+    <select id="selectByBillNo" resultType="com.galaxy.moon.pp.model.bean.OpenAccountBill">
       SELECT * from tb_open_account_bill
       WHERE billNo = #{billNo}
     </select>
@@ -25,13 +19,13 @@
     delete from tb_open_account_bill
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.galaxy.moon.pp.model.OpenAccountBill">
+    <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.OpenAccountBill">
     insert into tb_open_account_bill (id, billNo, userId, 
       status, createTime)
     values (#{id,jdbcType=BIGINT}, #{billNo,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.OpenAccountBill">
+    <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.OpenAccountBill">
         insert into tb_open_account_bill
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -68,7 +62,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.OpenAccountBill">
+    <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.OpenAccountBill">
         update tb_open_account_bill
         <set>
             <if test="billNo != null">
@@ -86,7 +80,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.OpenAccountBill">
+    <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.OpenAccountBill">
     update tb_open_account_bill
     set billNo = #{billNo,jdbcType=VARCHAR},
       userId = #{userId,jdbcType=BIGINT},

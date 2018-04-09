@@ -5,7 +5,7 @@ import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.model.bean.User;
-import com.galaxy.moon.pp.model.dto.CloseAccountDTO;
+import com.galaxy.moon.pp.model.dto.CombFreezeDTO;
 import com.galaxy.moon.pp.service.BillIdService;
 import com.galaxy.moon.pp.service.UserService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Component
-public class CloseAccountHandler {
+public class CombFreezeHandler {
 
     @Autowired
     BillIdService billIdService;
@@ -26,30 +26,22 @@ public class CloseAccountHandler {
     UserService userService;
 
     /**
+     * 参数中需要知道用户ID和 充值金额
      * @param jsonObject
-     * @param httpSession
      * @return
      */
     public Result sign(JSONObject jsonObject, HttpSession httpSession) {
-        try {
-            User user = (User) httpSession.getAttribute("user");
-            long userId = user.getId();
-            if (null == user.getIpsAccount()) {
-                user = userService.findById(userId);
-            }
+        String billNo = billIdService.nextStrId();
 
-            CloseAccountDTO closeAccountDTO = new CloseAccountDTO();
-            closeAccountDTO.setUserName(user.getUserName());
-            closeAccountDTO.setIpsAcctNo(user.getIpsAccount());
-            closeAccountDTO.setS2SUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/closeAccount/inform");
-            closeAccountDTO.setWebUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/s2s/closeAccount");
-            String reqStr = JSONObject.toJSONString(closeAccountDTO);
+        User user = (User) httpSession.getAttribute("user");
+        CombFreezeDTO combFreezeDTO = new CombFreezeDTO();
 
-            JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "user.register", reqStr);
-            return ResultGenerator.genSuccessResult(result);
-        } catch (Exception e) {
-            return ResultGenerator.genFailResult();
-        }
+        combFreezeDTO.setWebUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/freeze/inform");
+        combFreezeDTO.setS2SUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/s2s/freeze");
+        String reqStr = JSONObject.toJSONString(combFreezeDTO);
+
+        JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "trade.combFreeze", reqStr);
+        return ResultGenerator.genSuccessResult(result);
     }
 
     public void inform(String resultCode, String resultMsg, String merchantID, String sign, String response, HttpServletResponse httpServletResponse) {
@@ -68,4 +60,5 @@ public class CloseAccountHandler {
             e.printStackTrace();
         }
     }
+
 }

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.galaxy.moon.pp.dao.MessageMapper">
-  <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.Message">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="messgaeName" jdbcType="VARCHAR" property="messgaeName" />
-    <result column="messgaeType" jdbcType="INTEGER" property="messgaeType" />
-    <result column="messgaeContent" jdbcType="VARCHAR" property="messgaeContent" />
-    <result column="messgaeStatus" jdbcType="INTEGER" property="messgaeStatus" />
-    <result column="createTime" jdbcType="BIGINT" property="createTime" />
-  </resultMap>
+
   <sql id="Base_Column_List">
     id, messgaeName, messgaeType, messgaeContent, messgaeStatus, createTime
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.galaxy.moon.pp.model.bean.Message">
     select 
     <include refid="Base_Column_List" />
     from tb_message
@@ -22,7 +15,7 @@
     delete from tb_message
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.galaxy.moon.pp.model.Message">
+  <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.Message">
     insert into tb_message (id, messgaeName, messgaeType, 
       messgaeContent, messgaeStatus, createTime
       )
@@ -30,7 +23,7 @@
       #{messgaeContent,jdbcType=VARCHAR}, #{messgaeStatus,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.Message">
+  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.Message">
     insert into tb_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +66,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.Message">
+  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.Message">
     update tb_message
     <set>
       <if test="messgaeName != null">
@@ -94,7 +87,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.Message">
+  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.Message">
     update tb_message
     set messgaeName = #{messgaeName,jdbcType=VARCHAR},
       messgaeType = #{messgaeType,jdbcType=INTEGER},

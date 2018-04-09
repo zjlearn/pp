@@ -1,53 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.galaxy.moon.pp.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.User">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="userName" jdbcType="VARCHAR" property="userName"/>
-        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
-        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
-        <result column="emial" jdbcType="VARCHAR" property="emial"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="sex" jdbcType="TINYINT" property="sex"/>
-        <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
-        <result column="age" jdbcType="INTEGER" property="age"/>
-        <result column="birthPlace" jdbcType="VARCHAR" property="birthPlace"/>
-        <result column="marryStatus" jdbcType="TINYINT" property="marryStatus"/>
-        <result column="userType" jdbcType="INTEGER" property="userType"/>
-        <result column="ipsAccount" jdbcType="VARCHAR" property="ipsAccount"/>
-        <result column="redPacketNum" jdbcType="INTEGER" property="redPacketNum"/>
-        <result column="assets" jdbcType="DECIMAL" property="assets"/>
-        <result column="availableRemain" jdbcType="DECIMAL" property="availableRemain"/>
-        <result column="frozenRemain" jdbcType="DECIMAL" property="frozenRemain"/>
-        <result column="points" jdbcType="INTEGER" property="points"/>
-        <result column="recomReward" jdbcType="DECIMAL" property="recomReward"/>
-        <result column="userRole" jdbcType="INTEGER" property="userRole"/>
-        <result column="status" jdbcType="TINYINT" property="status"/>
-        <result column="createTime" jdbcType="BIGINT" property="createTime"/>
-        <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="deleteTime" jdbcType="BIGINT" property="deleteTime"/>
-        <result column="deleteFlag" jdbcType="INTEGER" property="deleteFlag"/>
-    </resultMap>
     <sql id="Base_Column_List">
     id, userName, nickName, mobile, emial, password, sex, idCard, age, birthPlace, marryStatus, 
     userType, ipsAccount, redPacketNum, assets, availableRemain, frozenRemain, points, 
     recomReward, userRole, status, createTime, updateTime, deleteTime, deleteFlag
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.galaxy.moon.pp.model.bean.User">
         select
         <include refid="Base_Column_List"/>
         from tb_user
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="selectByMobile" resultType="com.galaxy.moon.pp.model.User">
-      SELECT * from tb_user
-      WHERE mobile = #{mobileNo}
+    <select id="selectByMobile" resultType="com.galaxy.moon.pp.model.bean.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from tb_user
+        WHERE mobile = #{mobileNo}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.galaxy.moon.pp.model.User">
+    <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.User">
     insert into tb_user (id, userName, nickName, 
       mobile, emial, password, 
       sex, idCard, age, birthPlace, 
@@ -67,7 +42,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=BIGINT}, #{deleteFlag,jdbcType=INTEGER}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.User">
+    <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.User">
         insert into tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -224,7 +199,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.User">
+    <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.User">
         update tb_user
         <set>
             <if test="userName != null">
@@ -302,7 +277,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.User">
+    <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.User">
     update tb_user
     set userName = #{userName,jdbcType=VARCHAR},
       nickName = #{nickName,jdbcType=VARCHAR},

@@ -1,65 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.galaxy.moon.pp.dao.ProductMapper">
-  <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.Product">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="productName" jdbcType="VARCHAR" property="productName" />
-    <result column="productType" jdbcType="INTEGER" property="productType" />
-    <result column="productDetailId" jdbcType="INTEGER" property="productDetailId" />
-    <result column="amount" jdbcType="INTEGER" property="amount" />
-    <result column="rateReturn" jdbcType="DOUBLE" property="rateReturn" />
-    <result column="duration" jdbcType="INTEGER" property="duration" />
-    <result column="lowerLimit" jdbcType="INTEGER" property="lowerLimit" />
-    <result column="autoInvest" jdbcType="INTEGER" property="autoInvest" />
-    <result column="remainder" jdbcType="INTEGER" property="remainder" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="createTime" jdbcType="BIGINT" property="createTime" />
-    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="deleteTime" jdbcType="BIGINT" property="deleteTime" />
-    <result column="deleteFlag" jdbcType="INTEGER" property="deleteFlag" />
-  </resultMap>
+<mapper namespace="com.galaxy.moon.pp.dao.ProjectMapper">
+
   <sql id="Base_Column_List">
-    id, productName, productType, productDetailId, amount, rateReturn, duration, lowerLimit, 
+    id, projectName, projectType, projectDetailId, amount, rateReturn, duration, lowerLimit, 
     autoInvest, remainder, status, createTime, updateTime, deleteTime, deleteFlag
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.galaxy.moon.pp.model.bean.Project">
     select 
     <include refid="Base_Column_List" />
-    from tb_product
+    from tb_project
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tb_product
+    delete from tb_project
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.galaxy.moon.pp.model.Product">
-    insert into tb_product (id, productName, productType, 
-      productDetailId, amount, rateReturn, 
+  <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.Project">
+    insert into tb_project (id, projectName, projectType, 
+      projectDetailId, amount, rateReturn, 
       duration, lowerLimit, autoInvest, 
       remainder, status, createTime, 
       updateTime, deleteTime, deleteFlag
       )
-    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{productType,jdbcType=INTEGER}, 
-      #{productDetailId,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{rateReturn,jdbcType=DOUBLE}, 
+    values (#{id,jdbcType=BIGINT}, #{projectName,jdbcType=VARCHAR}, #{projectType,jdbcType=INTEGER}, 
+      #{projectDetailId,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{rateReturn,jdbcType=DOUBLE}, 
       #{duration,jdbcType=INTEGER}, #{lowerLimit,jdbcType=INTEGER}, #{autoInvest,jdbcType=INTEGER}, 
       #{remainder,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=BIGINT}, #{deleteFlag,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.Product">
-    insert into tb_product
+  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.Project">
+    insert into tb_project
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="productName != null">
-        productName,
+      <if test="projectName != null">
+        projectName,
       </if>
-      <if test="productType != null">
-        productType,
+      <if test="projectType != null">
+        projectType,
       </if>
-      <if test="productDetailId != null">
-        productDetailId,
+      <if test="projectDetailId != null">
+        projectDetailId,
       </if>
       <if test="amount != null">
         amount,
@@ -99,14 +83,14 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="productName != null">
-        #{productName,jdbcType=VARCHAR},
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="productType != null">
-        #{productType,jdbcType=INTEGER},
+      <if test="projectType != null">
+        #{projectType,jdbcType=INTEGER},
       </if>
-      <if test="productDetailId != null">
-        #{productDetailId,jdbcType=INTEGER},
+      <if test="projectDetailId != null">
+        #{projectDetailId,jdbcType=INTEGER},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=INTEGER},
@@ -143,17 +127,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.Product">
-    update tb_product
+  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.Project">
+    update tb_project
     <set>
-      <if test="productName != null">
-        productName = #{productName,jdbcType=VARCHAR},
+      <if test="projectName != null">
+        projectName = #{projectName,jdbcType=VARCHAR},
       </if>
-      <if test="productType != null">
-        productType = #{productType,jdbcType=INTEGER},
+      <if test="projectType != null">
+        projectType = #{projectType,jdbcType=INTEGER},
       </if>
-      <if test="productDetailId != null">
-        productDetailId = #{productDetailId,jdbcType=INTEGER},
+      <if test="projectDetailId != null">
+        projectDetailId = #{projectDetailId,jdbcType=INTEGER},
       </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=INTEGER},
@@ -191,11 +175,11 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.Product">
-    update tb_product
-    set productName = #{productName,jdbcType=VARCHAR},
-      productType = #{productType,jdbcType=INTEGER},
-      productDetailId = #{productDetailId,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.Project">
+    update tb_project
+    set projectName = #{projectName,jdbcType=VARCHAR},
+      projectType = #{projectType,jdbcType=INTEGER},
+      projectDetailId = #{projectDetailId,jdbcType=INTEGER},
       amount = #{amount,jdbcType=INTEGER},
       rateReturn = #{rateReturn,jdbcType=DOUBLE},
       duration = #{duration,jdbcType=INTEGER},

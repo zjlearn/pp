@@ -3,7 +3,9 @@ package com.galaxy.moon.pp.biz.ips;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxy.moon.common.Result;
 import com.galaxy.moon.common.ResultGenerator;
+import com.galaxy.moon.common.util.DateUtil;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
+import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.model.dto.FreezeDTO;
 import com.galaxy.moon.pp.service.BillIdService;
 import com.galaxy.moon.pp.service.UserService;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 
 /**
  * create by zhangjun1 on 2018/4/4
@@ -29,18 +32,30 @@ public class FreezeHandler {
 
     public Result sign(JSONObject jsonObject, HttpSession httpSession) {
         String billNo = billIdService.nextStrId();
-
-        //todo 设置传输参数
+        User user = (User) httpSession.getAttribute("user");
         FreezeDTO freezeDTO = new FreezeDTO();
+        freezeDTO.setMerBillNo(billNo);
+        String bizType = "";
+        String projectNo = "";
+        String regType = "";
+        String contractNo = "";
+        String trdAmt = "";
+        String merFee = "";
+        String freezeMerType = "";
+        freezeDTO.setMerDate(DateUtil.parseLongToString(System.currentTimeMillis(), DateUtil.defaultDatePattern));
+        freezeDTO.setProjectNo(projectNo);
 
-
+        freezeDTO.setWebUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/freeze/inform");
+        freezeDTO.setS2SUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/s2s/freeze");
         String reqStr = JSONObject.toJSONString(freezeDTO);
 
-        JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "trade.deposit", reqStr);
+        JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "trade.freeze", reqStr);
         return ResultGenerator.genSuccessResult(result);
     }
 
-    public void inform(String resultCode, String resultMsg, String merchantID, String sign, String response, HttpServletResponse httpServletResponse) {
+
+    public void inform(String resultCode, String resultMsg, String merchantID, String sign, String
+            response, HttpServletResponse httpServletResponse) {
         try {
             JSONObject jsonObject = IPSRSAUtil.analysisDepRespData(merchantID, resultCode, resultMsg, sign, response);
             String merBillNo = jsonObject.getString("merBillNo");  //商户订单
@@ -57,3 +72,7 @@ public class FreezeHandler {
         }
     }
 }
+}
+
+
+

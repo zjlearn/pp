@@ -297,7 +297,7 @@ public class IPSCertUtil {
                 } else {
                     Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
                 }
-//				ks = KeyStore.getInstance(type, "BC");
+//				ks = KeyStore.getInstance(status, "BC");
                 ks = KeyStore.getInstance(type);
             }
             log.info("Load RSA CertPath=[" + pfxkeyfile + "],Pwd=["

@@ -1,4 +1,4 @@
-package com.galaxy.moon.pp.model;
+package com.galaxy.moon.pp.model.bean;
 
 public class Message {
     private Long id;

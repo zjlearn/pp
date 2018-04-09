@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.galaxy.moon.pp.dao.RedPacketMapper">
+  <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.bean.RedPacket">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="packetName" jdbcType="VARCHAR" property="packetName" />
+    <result column="packetType" jdbcType="INTEGER" property="packetType" />
+    <result column="packetAmount" jdbcType="DECIMAL" property="packetAmount" />
+    <result column="periodValidity" jdbcType="INTEGER" property="periodValidity" />
+    <result column="durtionLimit" jdbcType="INTEGER" property="durtionLimit" />
+    <result column="amountLimit" jdbcType="INTEGER" property="amountLimit" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createTime" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, packetName, packetType, packetAmount, periodValidity, durtionLimit, amountLimit, 
+    status, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_redPacket
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_redPacket
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.RedPacket">
+    insert into tb_redPacket (id, userId, packetName, 
+      packetType, packetAmount, periodValidity, 
+      durtionLimit, amountLimit, status, 
+      createTime)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{packetName,jdbcType=VARCHAR}, 
+      #{packetType,jdbcType=INTEGER}, #{packetAmount,jdbcType=DECIMAL}, #{periodValidity,jdbcType=INTEGER}, 
+      #{durtionLimit,jdbcType=INTEGER}, #{amountLimit,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.RedPacket">
+    insert into tb_redPacket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="packetName != null">
+        packetName,
+      </if>
+      <if test="packetType != null">
+        packetType,
+      </if>
+      <if test="packetAmount != null">
+        packetAmount,
+      </if>
+      <if test="periodValidity != null">
+        periodValidity,
+      </if>
+      <if test="durtionLimit != null">
+        durtionLimit,
+      </if>
+      <if test="amountLimit != null">
+        amountLimit,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="packetName != null">
+        #{packetName,jdbcType=VARCHAR},
+      </if>
+      <if test="packetType != null">
+        #{packetType,jdbcType=INTEGER},
+      </if>
+      <if test="packetAmount != null">
+        #{packetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="periodValidity != null">
+        #{periodValidity,jdbcType=INTEGER},
+      </if>
+      <if test="durtionLimit != null">
+        #{durtionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="amountLimit != null">
+        #{amountLimit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.RedPacket">
+    update tb_redPacket
+    <set>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="packetName != null">
+        packetName = #{packetName,jdbcType=VARCHAR},
+      </if>
+      <if test="packetType != null">
+        packetType = #{packetType,jdbcType=INTEGER},
+      </if>
+      <if test="packetAmount != null">
+        packetAmount = #{packetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="periodValidity != null">
+        periodValidity = #{periodValidity,jdbcType=INTEGER},
+      </if>
+      <if test="durtionLimit != null">
+        durtionLimit = #{durtionLimit,jdbcType=INTEGER},
+      </if>
+      <if test="amountLimit != null">
+        amountLimit = #{amountLimit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.RedPacket">
+    update tb_redPacket
+    set userId = #{userId,jdbcType=BIGINT},
+      packetName = #{packetName,jdbcType=VARCHAR},
+      packetType = #{packetType,jdbcType=INTEGER},
+      packetAmount = #{packetAmount,jdbcType=DECIMAL},
+      periodValidity = #{periodValidity,jdbcType=INTEGER},
+      durtionLimit = #{durtionLimit,jdbcType=INTEGER},
+      amountLimit = #{amountLimit,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

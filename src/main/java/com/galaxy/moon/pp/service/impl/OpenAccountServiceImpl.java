@@ -1,7 +1,7 @@
 package com.galaxy.moon.pp.service.impl;
 
 import com.galaxy.moon.pp.dao.OpenAccountBillMapper;
-import com.galaxy.moon.pp.model.OpenAccountBill;
+import com.galaxy.moon.pp.model.bean.OpenAccountBill;
 import com.galaxy.moon.pp.service.OpenAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
