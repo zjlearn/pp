@@ -36,7 +36,7 @@ public class UserRegisterController {
                              @RequestParam("resultMsg") String resultMsg,
                              @RequestParam("merchantID") String merchantID,
                              @RequestParam("sign") String sign,
-                             @RequestParam("response") String response, HttpServletResponse httpResponse) {
-        userRegisterHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse);
+                             @RequestParam("response") String response, HttpServletResponse httpResponse,  HttpSession httpSession) {
+        userRegisterHandler.inform(resultCode, resultMsg, merchantID, sign, response, httpResponse, httpSession);
     }
 }

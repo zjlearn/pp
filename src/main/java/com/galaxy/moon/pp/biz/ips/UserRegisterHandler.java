@@ -49,7 +49,7 @@ public class UserRegisterHandler {
                 logger.error("更新用户信息失败，请稍后再试!");
             }
 
-            String orderId = String.valueOf(new Random().nextLong());
+            String orderId = billIdService.nextStrId();
             System.out.println("orderId 是："+ orderId);
 
             UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
@@ -75,7 +75,8 @@ public class UserRegisterHandler {
         }
     }
 
-    public void inform(String resultCode, String resultMsg, String merchantID, String sign, String response, HttpServletResponse httpServletResponse) {
+    public void inform(String resultCode, String resultMsg, String merchantID, String sign,
+                       String response, HttpServletResponse httpServletResponse, HttpSession httpSession) {
         try {
             JSONObject jsonObject = IPSRSAUtil.analysisDepRespData(merchantID, resultCode, resultMsg, sign, response);
             String merBillNo = jsonObject.getString("merBillNo");  //商户订单
@@ -84,6 +85,10 @@ public class UserRegisterHandler {
             String ipsAcctNo = jsonObject.getString("ipsAcctNo");
             String status = jsonObject.getString("status");
             System.out.println("接收到ips的同步返回, 解析之后得到: " + jsonObject);
+            User user = (User) httpSession.getAttribute("user");
+            if(user == null ){
+                System.out.println("user is null");
+            }
             httpServletResponse.sendRedirect(IPSCONSTANTS.server_Domain + "/#/account");
         } catch (IOException e) {
             e.printStackTrace();

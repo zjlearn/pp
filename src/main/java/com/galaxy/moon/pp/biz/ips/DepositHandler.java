@@ -53,6 +53,9 @@ public class DepositHandler {
         depositDTO.setMerFee(amount);
         depositDTO.setMerFeeType(MerFeeTypeEnum.OUTER_PAY.type);
 
+        depositDTO.setWebUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/deposit/inform");
+        depositDTO.setS2SUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/s2s/deposit" );
+
         String reqStr = JSONObject.toJSONString(depositDTO);
 
         JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "trade.deposit", reqStr);
