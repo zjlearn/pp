@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.galaxy.moon.pp.dao.DepositBillMapper">
+    <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.bean.DepositBill">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="billNo" jdbcType="VARCHAR" property="billNo"/>
+        <result column="ipsBillNo" jdbcType="VARCHAR" property="ipsBillNo"/>
+        <result column="userId" jdbcType="BIGINT" property="userId"/>
+        <result column="depositType" jdbcType="TINYINT" property="depositType"/>
+        <result column="channelType" jdbcType="TINYINT" property="channelType"/>
+        <result column="bankCode" jdbcType="VARCHAR" property="bankCode"/>
+        <result column="bankName" jdbcType="VARCHAR" property="bankName"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="ipsTrdAmt" jdbcType="DECIMAL" property="ipsTrdAmt"/>
+        <result column="ipsFee" jdbcType="DECIMAL" property="ipsFee"/>
+        <result column="merFee" jdbcType="DECIMAL" property="merFee"/>
+        <result column="ipsDoTime" jdbcType="VARCHAR" property="ipsDoTime"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="createTime" jdbcType="BIGINT" property="createTime"/>
+        <result column="updateTime" jdbcType="BIGINT" property="updateTime"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        id, billNo, userId, amount, status, createTime
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long"
-            resultType="com.galaxy.moon.pp.model.bean.DepositBill">
+    id, billNo, ipsBillNo, userId, depositType, channelType, bankCode, bankName, amount, 
+    ipsTrdAmt, ipsFee, merFee, ipsDoTime, status, createTime, updateTime
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_deposit_bill
         where id = #{id,jdbcType=BIGINT}
     </select>
     <select id="selectByBillNo" resultType="com.galaxy.moon.pp.model.bean.DepositBill">
-      SELECT  * from tb_deposit_bill
+        SELECT * from tb_deposit_bill
         WHERE billNo = #{billNo}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        DELETE FROM tb_deposit_bill
-        WHERE id = #{id,jdbcType=BIGINT}
-    </delete>
+    delete from tb_deposit_bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
     <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.DepositBill">
-        INSERT INTO tb_deposit_bill (id, billNo, userId,
-                                     amount, status, createTime
-        )
-        VALUES (#{id,jdbcType=BIGINT}, #{billNo,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
-                #{amount,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}
-        )
-    </insert>
+    insert into tb_deposit_bill (id, billNo, ipsBillNo, 
+      userId, depositType, channelType, 
+      bankCode, bankName, amount, 
+      ipsTrdAmt, ipsFee, merFee, 
+      ipsDoTime, status, createTime, 
+      updateTime)
+    values (#{id,jdbcType=BIGINT}, #{billNo,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{depositType,jdbcType=TINYINT}, #{channelType,jdbcType=TINYINT}, 
+      #{bankCode,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{ipsTrdAmt,jdbcType=DECIMAL}, #{ipsFee,jdbcType=DECIMAL}, #{merFee,jdbcType=DECIMAL}, 
+      #{ipsDoTime,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT})
+  </insert>
     <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.DepositBill">
         insert into tb_deposit_bill
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -36,17 +60,47 @@
             <if test="billNo != null">
                 billNo,
             </if>
+            <if test="ipsBillNo != null">
+                ipsBillNo,
+            </if>
             <if test="userId != null">
                 userId,
             </if>
+            <if test="depositType != null">
+                depositType,
+            </if>
+            <if test="channelType != null">
+                channelType,
+            </if>
+            <if test="bankCode != null">
+                bankCode,
+            </if>
+            <if test="bankName != null">
+                bankName,
+            </if>
             <if test="amount != null">
                 amount,
+            </if>
+            <if test="ipsTrdAmt != null">
+                ipsTrdAmt,
+            </if>
+            <if test="ipsFee != null">
+                ipsFee,
+            </if>
+            <if test="merFee != null">
+                merFee,
+            </if>
+            <if test="ipsDoTime != null">
+                ipsDoTime,
             </if>
             <if test="status != null">
                 status,
             </if>
             <if test="createTime != null">
                 createTime,
+            </if>
+            <if test="updateTime != null">
+                updateTime,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -56,17 +110,47 @@
             <if test="billNo != null">
                 #{billNo,jdbcType=VARCHAR},
             </if>
+            <if test="ipsBillNo != null">
+                #{ipsBillNo,jdbcType=VARCHAR},
+            </if>
             <if test="userId != null">
                 #{userId,jdbcType=BIGINT},
             </if>
+            <if test="depositType != null">
+                #{depositType,jdbcType=TINYINT},
+            </if>
+            <if test="channelType != null">
+                #{channelType,jdbcType=TINYINT},
+            </if>
+            <if test="bankCode != null">
+                #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
             <if test="amount != null">
                 #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="ipsTrdAmt != null">
+                #{ipsTrdAmt,jdbcType=DECIMAL},
+            </if>
+            <if test="ipsFee != null">
+                #{ipsFee,jdbcType=DECIMAL},
+            </if>
+            <if test="merFee != null">
+                #{merFee,jdbcType=DECIMAL},
+            </if>
+            <if test="ipsDoTime != null">
+                #{ipsDoTime,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
@@ -76,11 +160,38 @@
             <if test="billNo != null">
                 billNo = #{billNo,jdbcType=VARCHAR},
             </if>
+            <if test="ipsBillNo != null">
+                ipsBillNo = #{ipsBillNo,jdbcType=VARCHAR},
+            </if>
             <if test="userId != null">
                 userId = #{userId,jdbcType=BIGINT},
             </if>
+            <if test="depositType != null">
+                depositType = #{depositType,jdbcType=TINYINT},
+            </if>
+            <if test="channelType != null">
+                channelType = #{channelType,jdbcType=TINYINT},
+            </if>
+            <if test="bankCode != null">
+                bankCode = #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                bankName = #{bankName,jdbcType=VARCHAR},
+            </if>
             <if test="amount != null">
                 amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="ipsTrdAmt != null">
+                ipsTrdAmt = #{ipsTrdAmt,jdbcType=DECIMAL},
+            </if>
+            <if test="ipsFee != null">
+                ipsFee = #{ipsFee,jdbcType=DECIMAL},
+            </if>
+            <if test="merFee != null">
+                merFee = #{merFee,jdbcType=DECIMAL},
+            </if>
+            <if test="ipsDoTime != null">
+                ipsDoTime = #{ipsDoTime,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 status = #{status,jdbcType=TINYINT},
@@ -88,16 +199,29 @@
             <if test="createTime != null">
                 createTime = #{createTime,jdbcType=BIGINT},
             </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime,jdbcType=BIGINT},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.DepositBill">
-        UPDATE tb_deposit_bill
-        SET billNo     = #{billNo,jdbcType=VARCHAR},
-            userId     = #{userId,jdbcType=BIGINT},
-            amount     = #{amount,jdbcType=DECIMAL},
-            status     = #{status,jdbcType=TINYINT},
-            createTime = #{createTime,jdbcType=BIGINT}
-        WHERE id = #{id,jdbcType=BIGINT}
-    </update>
+    update tb_deposit_bill
+    set billNo = #{billNo,jdbcType=VARCHAR},
+      ipsBillNo = #{ipsBillNo,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=BIGINT},
+      depositType = #{depositType,jdbcType=TINYINT},
+      channelType = #{channelType,jdbcType=TINYINT},
+      bankCode = #{bankCode,jdbcType=VARCHAR},
+      bankName = #{bankName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      ipsTrdAmt = #{ipsTrdAmt,jdbcType=DECIMAL},
+      ipsFee = #{ipsFee,jdbcType=DECIMAL},
+      merFee = #{merFee,jdbcType=DECIMAL},
+      ipsDoTime = #{ipsDoTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=BIGINT},
+      updateTime = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

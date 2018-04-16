@@ -47,7 +47,7 @@ public class DepositBillServiceImpl implements DepositBillService {
 
     @Override
     public DepositBill selectByBillNo(String billNo) {
-        return null;
+        return depositBillMapper.selectByBillNo(billNo);
     }
 
 

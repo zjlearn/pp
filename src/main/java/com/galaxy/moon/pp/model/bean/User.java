@@ -253,4 +253,6 @@ public class User {
     public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
+
 }

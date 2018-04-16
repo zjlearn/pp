@@ -4,10 +4,12 @@ import com.galaxy.moon.pp.dao.WithdrawBillMapper;
 import com.galaxy.moon.pp.model.bean.WithdrawBill;
 import com.galaxy.moon.pp.service.WithdrawBillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * create by zhangjun1 on 2018/4/3
  */
+@Service
 public class WithdrawBillServiceImpl implements WithdrawBillService {
 
     @Autowired

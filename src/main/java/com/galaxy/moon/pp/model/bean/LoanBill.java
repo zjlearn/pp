@@ -3,45 +3,38 @@ package com.galaxy.moon.pp.model.bean;
 import java.math.BigDecimal;
 
 /**
- * create by zhangjun1 on 2017/12/20
- * 代表用户投资的单据。 主要有用户
+ * 借款的单据信息
  */
 public class LoanBill {
     private Long id;
+
     private Long userId;
+
     private String userName;
+
     private String mobile;
-    private Long projectId;   // 关联的产品Id
-    private Long loanAmount;
-    private BigDecimal expectRate; // 预期的利率
-    private Integer loanType;  // 借款类型，与产品类型不同
-    private Integer duration;  // 借款时长
-    private Long asssetId; // 资产Id
+
+    private Long projectId;
+
+    private BigDecimal loanAmount;
+
+    private BigDecimal expectRate;
+
+    private Byte loanType;
+
+    private Integer duration;
+
+    private Long asssetId;
+
+    private String district;
+
+    private Byte status;
+
+    private String loanRemark;
+
+    private String statusRemark;
 
     private Long createTime;
-    private Integer status; // 待审核， 审核中， 已通过， 已拒绝
-    private String loanRemark;
-    private String statusRemark;  //已拒绝时， 保存原因
-
-
-    public LoanBill() {
-    }
-
-    public Long getAsssetId() {
-        return asssetId;
-    }
-
-    public void setAsssetId(Long asssetId) {
-        this.asssetId = asssetId;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
 
     public Long getId() {
         return id;
@@ -64,7 +57,15 @@ public class LoanBill {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
     public Long getProjectId() {
@@ -75,11 +76,11 @@ public class LoanBill {
         this.projectId = projectId;
     }
 
-    public Long getLoanAmount() {
+    public BigDecimal getLoanAmount() {
         return loanAmount;
     }
 
-    public void setLoanAmount(Long loanAmount) {
+    public void setLoanAmount(BigDecimal loanAmount) {
         this.loanAmount = loanAmount;
     }
 
@@ -91,27 +92,43 @@ public class LoanBill {
         this.expectRate = expectRate;
     }
 
-    public Integer getLoanType() {
+    public Byte getLoanType() {
         return loanType;
     }
 
-    public void setLoanType(Integer loanType) {
+    public void setLoanType(Byte loanType) {
         this.loanType = loanType;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
-    public Integer getStatus() {
+    public Long getAsssetId() {
+        return asssetId;
+    }
+
+    public void setAsssetId(Long asssetId) {
+        this.asssetId = asssetId;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district == null ? null : district.trim();
+    }
+
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -120,7 +137,7 @@ public class LoanBill {
     }
 
     public void setLoanRemark(String loanRemark) {
-        this.loanRemark = loanRemark;
+        this.loanRemark = loanRemark == null ? null : loanRemark.trim();
     }
 
     public String getStatusRemark() {
@@ -128,14 +145,14 @@ public class LoanBill {
     }
 
     public void setStatusRemark(String statusRemark) {
-        this.statusRemark = statusRemark;
+        this.statusRemark = statusRemark == null ? null : statusRemark.trim();
     }
 
-    public String getMobile() {
-        return mobile;
+    public Long getCreateTime() {
+        return createTime;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 }

@@ -15,8 +15,13 @@ public class Project {
     private Integer projectDetailId;
 
     private BigDecimal amount;
+    private Integer rateType;
 
     private Double rateReturn;
+
+    private Double rateMin;
+
+    private Double rateMax;
 
     private Integer duration;
 
@@ -162,5 +167,29 @@ public class Project {
 
     public void setProjectNo(String projectNo) {
         this.projectNo = projectNo;
+    }
+
+    public Integer getRateType() {
+        return rateType;
+    }
+
+    public void setRateType(Integer rateType) {
+        this.rateType = rateType;
+    }
+
+    public Double getRateMin() {
+        return rateMin;
+    }
+
+    public void setRateMin(Double rateMin) {
+        this.rateMin = rateMin;
+    }
+
+    public Double getRateMax() {
+        return rateMax;
+    }
+
+    public void setRateMax(Double rateMax) {
+        this.rateMax = rateMax;
     }
 }

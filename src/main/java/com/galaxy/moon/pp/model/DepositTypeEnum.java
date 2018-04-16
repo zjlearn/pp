@@ -5,7 +5,8 @@ package com.galaxy.moon.pp.model;
  */
 public enum DepositTypeEnum {
 
-    ORIGIN("1", "普通充值");
+    ORIGIN("1", "普通充值"),
+    REPAY("2", "还款充值");
 
     public final String type;
     public final String desc;

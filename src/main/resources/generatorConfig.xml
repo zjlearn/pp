@@ -58,17 +58,31 @@
         <!--<property name="useActualColumnNames" value="true" />-->
         <!--</table>-->
 
-        <!--<table tableName="tb_deposit_bill" domainObjectName="DepositBill" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
-        <!--<property name="useActualColumnNames" value="true" />-->
+        <!--<table tableName="tb_deposit_bill" domainObjectName="DepositBill" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
 
-        <!--<table tableName="tb_withdraw_bill" domainObjectName="Product" enableCountByExample="false"-->
-        <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--<table tableName="tb_withdraw_bill" domainObjectName="WithdrawBill" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
 
-        <table tableName="tb_redPacket" domainObjectName="RedPacket" enableCountByExample="false"
+        <!--<table tableName="tb_redPacket" domainObjectName="RedPacket" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="tb_loan_bill" domainObjectName="LoanBill" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--</table>-->
+
+        <table tableName="tb_regUser_bill" domainObjectName="RegUserBill" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
