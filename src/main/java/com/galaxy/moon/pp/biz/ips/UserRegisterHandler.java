@@ -6,9 +6,11 @@ import com.galaxy.moon.common.ResultGenerator;
 import com.galaxy.moon.common.util.DateUtil;
 import com.galaxy.moon.pp.common.IPSCONSTANTS;
 import com.galaxy.moon.pp.controller.ips.UserRegisterController;
+import com.galaxy.moon.pp.model.bean.RegUserBill;
 import com.galaxy.moon.pp.model.bean.User;
 import com.galaxy.moon.pp.model.dto.UserRegisterDTO;
 import com.galaxy.moon.pp.service.BillIdService;
+import com.galaxy.moon.pp.service.UserBillService;
 import com.galaxy.moon.pp.service.UserService;
 import com.galaxy.moon.pp.util.IPSRSAUtil;
 import org.slf4j.Logger;
@@ -32,6 +34,9 @@ public class UserRegisterHandler {
     @Autowired
     BillIdService billIdService;
 
+    @Autowired
+    UserBillService userBillService;
+
     private Logger logger = LoggerFactory.getLogger(UserRegisterController.class);
 
     public Result userRegister(JSONObject jsonObject, HttpSession httpSession) {
@@ -49,33 +54,48 @@ public class UserRegisterHandler {
                 logger.error("更新用户信息失败，请稍后再试!");
             }
 
-            String orderId = String.valueOf(new Random().nextLong());
-            System.out.println("orderId 是："+ orderId);
+            String billNo = billIdService.nextStrId();
+            System.out.println("orderId 是：" + billNo);
 
             UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
-            userRegisterDTO.setMerBillNo(orderId);
+            userRegisterDTO.setMerBillNo(billNo);
             userRegisterDTO.setMerDate(DateUtil.parseLongToString(System.currentTimeMillis(), DateUtil.defaultDatePattern));
             userRegisterDTO.setUserName(realName);
-            userRegisterDTO.setUserType("1");
-            userRegisterDTO.setUserRole("1");
+            userRegisterDTO.setUserType(String.valueOf(user.getUserType()));
+            userRegisterDTO.setUserRole(String.valueOf(user.getUserRole()));
             userRegisterDTO.setRealName(realName);
             userRegisterDTO.setMobileNo(user.getMobile());
             userRegisterDTO.setBizType("1");
-            userRegisterDTO.setEnterName("");
+            userRegisterDTO.setEnterName("北京众盈天下商品经营有限公司");
+            userRegisterDTO.setOrgCode("110105016298627");
             userRegisterDTO.setIsAssureCom("1");
             userRegisterDTO.setWebUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/userRegister/inform");
             userRegisterDTO.setS2SUrl(IPSCONSTANTS.server_Domain + "/xhr/ips/s2s/userRegister");
             userRegisterDTO.setIdentNo(idCard);
             String reqStr = JSONObject.toJSONString(userRegisterDTO);
 
+            // 保存单据的状态
+            RegUserBill regUserBill = new RegUserBill();
+            regUserBill.setBillNo(billNo);
+            regUserBill.setUserId(user.getId());
+            regUserBill.setCreateTime(System.currentTimeMillis());
+            int rtn = userBillService.insert(regUserBill);
+
             JSONObject result = IPSRSAUtil.genReqData(IPSCONSTANTS.merchantID, "user.register", reqStr);
-            return ResultGenerator.genSuccessResult(result);
+
+            if(rtn==1){
+                return ResultGenerator.genSuccessResult(result);
+            }else{
+                return ResultGenerator.genFailResult("插入出错");
+            }
         } catch (Exception e) {
             return ResultGenerator.genFailResult();
         }
     }
 
-    public void inform(String resultCode, String resultMsg, String merchantID, String sign, String response, HttpServletResponse httpServletResponse) {
+    // 需要判断返回的状态
+    public void inform(String resultCode, String resultMsg, String merchantID, String sign,
+                       String response, HttpServletResponse httpServletResponse, HttpSession httpSession) {
         try {
             JSONObject jsonObject = IPSRSAUtil.analysisDepRespData(merchantID, resultCode, resultMsg, sign, response);
             String merBillNo = jsonObject.getString("merBillNo");  //商户订单
@@ -84,6 +104,22 @@ public class UserRegisterHandler {
             String ipsAcctNo = jsonObject.getString("ipsAcctNo");
             String status = jsonObject.getString("status");
             System.out.println("接收到ips的同步返回, 解析之后得到: " + jsonObject);
+
+            RegUserBill regUserBill = userBillService.selectByBillNo(merBillNo);
+            long userId = regUserBill.getUserId();
+            regUserBill.setIpsBillNo(ipsBillNo);
+            regUserBill.setIpsAcctNo(ipsAcctNo);
+            regUserBill.setIpsDoTime(ipsDoTime);
+            regUserBill.setStatus(Byte.valueOf(status));
+
+            int rtn = userBillService.updateByPrimaryKey(regUserBill);
+
+            User user = userService.findById(userId);
+            user.setIpsAccount(ipsAcctNo);
+
+            userService.updateByUserId(user);
+
+
             httpServletResponse.sendRedirect(IPSCONSTANTS.server_Domain + "/#/account");
         } catch (IOException e) {
             e.printStackTrace();

@@ -14,5 +14,5 @@ public class IPSCONSTANTS {
     public final static String S2S_SCUESSCODE = "ipsCheckOk";
     public final static String RESPONSE_FAIL_CODE = "999999";
     public final static String RESPONSE_SCUESS_CODE = "000000";
-    public final static String server_Domain = "http://cmxuvt.natappfree.cc";
+    public final static String server_Domain = "http://ruwafs.natappfree.cc";
 }

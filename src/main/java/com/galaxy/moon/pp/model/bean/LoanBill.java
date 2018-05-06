@@ -3,13 +3,15 @@ package com.galaxy.moon.pp.model.bean;
 import java.math.BigDecimal;
 
 /**
- * create by zhangjun1 on 2017/12/20
- * 代表用户投资的单据。 主要有用户
+ * 借款的单据信息
  */
 public class LoanBill {
     private Long id;
+
     private Long userId;
+
     private String userName;
+
     private String mobile;
     private Long projectId;   // 关联的产品Id
     private Long loanAmount;
@@ -26,25 +28,6 @@ public class LoanBill {
     //操作的业务员信息
     private String operatorId;
     private String operatorName;
-
-    public LoanBill() {
-    }
-
-    public Long getAsssetId() {
-        return asssetId;
-    }
-
-    public void setAsssetId(Long asssetId) {
-        this.asssetId = asssetId;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
 
     public Long getId() {
         return id;
@@ -68,6 +51,14 @@ public class LoanBill {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public Long getProjectId() {
@@ -102,6 +93,38 @@ public class LoanBill {
         this.loanType = loanType;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Integer getAssetsType() {
+        return assetsType;
+    }
+
+    public void setAssetsType(Integer assetsType) {
+        this.assetsType = assetsType;
+    }
+
+    public Long getAsssetId() {
+        return asssetId;
+    }
+
+    public void setAsssetId(Long asssetId) {
+        this.asssetId = asssetId;
+    }
+
+    public Integer getIntegrity() {
+        return integrity;
+    }
+
+    public void setIntegrity(Integer integrity) {
+        this.integrity = integrity;
+    }
+
     public Long getCreateTime() {
         return createTime;
     }
@@ -118,22 +141,6 @@ public class LoanBill {
         this.loanRemark = loanRemark;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public Integer getAssetsType() {
-        return assetsType;
-    }
-
-    public void setAssetsType(Integer assetsType) {
-        this.assetsType = assetsType;
-    }
-
     public String getOperatorId() {
         return operatorId;
     }
@@ -148,13 +155,5 @@ public class LoanBill {
 
     public void setOperatorName(String operatorName) {
         this.operatorName = operatorName;
-    }
-
-    public Integer getIntegrity() {
-        return integrity;
-    }
-
-    public void setIntegrity(Integer integrity) {
-        this.integrity = integrity;
     }
 }

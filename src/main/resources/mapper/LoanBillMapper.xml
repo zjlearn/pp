@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.galaxy.moon.pp.dao.LoanBillMapper">
+  <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.bean.LoanBill">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="projectId" jdbcType="BIGINT" property="projectId" />
+    <result column="loanAmount" jdbcType="DECIMAL" property="loanAmount" />
+    <result column="expectRate" jdbcType="DECIMAL" property="expectRate" />
+    <result column="loanType" jdbcType="TINYINT" property="loanType" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="asssetId" jdbcType="BIGINT" property="asssetId" />
+    <result column="district" jdbcType="VARCHAR" property="district" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="loanRemark" jdbcType="VARCHAR" property="loanRemark" />
+    <result column="statusRemark" jdbcType="VARCHAR" property="statusRemark" />
+    <result column="createTime" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, userName, mobile, projectId, loanAmount, expectRate, loanType, duration, 
+    asssetId, district, status, loanRemark, statusRemark, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_loan_bill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_loan_bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.LoanBill">
+    insert into tb_loan_bill (id, userId, userName, 
+      mobile, projectId, loanAmount, 
+      expectRate, loanType, duration, 
+      asssetId, district, status, 
+      loanRemark, statusRemark, createTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{projectId,jdbcType=BIGINT}, #{loanAmount,jdbcType=DECIMAL}, 
+      #{expectRate,jdbcType=DECIMAL}, #{loanType,jdbcType=TINYINT}, #{duration,jdbcType=INTEGER}, 
+      #{asssetId,jdbcType=BIGINT}, #{district,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{loanRemark,jdbcType=VARCHAR}, #{statusRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.LoanBill">
+    insert into tb_loan_bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="projectId != null">
+        projectId,
+      </if>
+      <if test="loanAmount != null">
+        loanAmount,
+      </if>
+      <if test="expectRate != null">
+        expectRate,
+      </if>
+      <if test="loanType != null">
+        loanType,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="asssetId != null">
+        asssetId,
+      </if>
+      <if test="district != null">
+        district,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="loanRemark != null">
+        loanRemark,
+      </if>
+      <if test="statusRemark != null">
+        statusRemark,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="loanAmount != null">
+        #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectRate != null">
+        #{expectRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loanType != null">
+        #{loanType,jdbcType=TINYINT},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="asssetId != null">
+        #{asssetId,jdbcType=BIGINT},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="loanRemark != null">
+        #{loanRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="statusRemark != null">
+        #{statusRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.LoanBill">
+    update tb_loan_bill
+    <set>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="loanAmount != null">
+        loanAmount = #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectRate != null">
+        expectRate = #{expectRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loanType != null">
+        loanType = #{loanType,jdbcType=TINYINT},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="asssetId != null">
+        asssetId = #{asssetId,jdbcType=BIGINT},
+      </if>
+      <if test="district != null">
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="loanRemark != null">
+        loanRemark = #{loanRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="statusRemark != null">
+        statusRemark = #{statusRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.LoanBill">
+    update tb_loan_bill
+    set userId = #{userId,jdbcType=BIGINT},
+      userName = #{userName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      projectId = #{projectId,jdbcType=BIGINT},
+      loanAmount = #{loanAmount,jdbcType=DECIMAL},
+      expectRate = #{expectRate,jdbcType=DECIMAL},
+      loanType = #{loanType,jdbcType=TINYINT},
+      duration = #{duration,jdbcType=INTEGER},
+      asssetId = #{asssetId,jdbcType=BIGINT},
+      district = #{district,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      loanRemark = #{loanRemark,jdbcType=VARCHAR},
+      statusRemark = #{statusRemark,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

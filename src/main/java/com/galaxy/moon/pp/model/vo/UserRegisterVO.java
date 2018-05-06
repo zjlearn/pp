@@ -5,12 +5,15 @@ import com.galaxy.moon.pp.model.bean.User;
 /**
  * create by zhangjun1 on 2018/1/20
  */
-public class RegisterUserVO {
+public class UserRegisterVO {
     private String mobileNo;
     private String password;
     private String inviteCode;
+    private Integer userRole;
+    private Integer userType;
 
-    public RegisterUserVO() {
+
+    public UserRegisterVO() {
     }
 
     public User toUser(){
@@ -43,12 +46,30 @@ public class RegisterUserVO {
         this.inviteCode = inviteCode;
     }
 
+    public Integer getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(Integer userRole) {
+        this.userRole = userRole;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
     @Override
     public String toString() {
-        return "RegisterUserVO{" +
+        return "UserRegisterVO{" +
                 "mobileNo='" + mobileNo + '\'' +
                 ", password='" + password + '\'' +
                 ", inviteCode='" + inviteCode + '\'' +
+                ", userRole=" + userRole +
+                ", userType=" + userType +
                 '}';
     }
 }

@@ -1,8 +1,9 @@
 package com.galaxy.moon.pp.model.bean;
 
-import java.math.BigDecimal;
-
-public class WithdrawBill {
+/**
+ * ips平台开户时，的单据信息
+ */
+public class RegUserBill {
     private Long id;
 
     private String billNo;
@@ -11,15 +12,9 @@ public class WithdrawBill {
 
     private Long userId;
 
-    private BigDecimal amount;
-
-    private BigDecimal ipsTrdAmt;
-
-    private BigDecimal merFee;
-
-    private BigDecimal ipsFee;
-
     private String ipsDoTime;
+
+    private String ipsAcctNo;
 
     private Byte status;
 
@@ -59,44 +54,20 @@ public class WithdrawBill {
         this.userId = userId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public BigDecimal getIpsTrdAmt() {
-        return ipsTrdAmt;
-    }
-
-    public void setIpsTrdAmt(BigDecimal ipsTrdAmt) {
-        this.ipsTrdAmt = ipsTrdAmt;
-    }
-
-    public BigDecimal getMerFee() {
-        return merFee;
-    }
-
-    public void setMerFee(BigDecimal merFee) {
-        this.merFee = merFee;
-    }
-
-    public BigDecimal getIpsFee() {
-        return ipsFee;
-    }
-
-    public void setIpsFee(BigDecimal ipsFee) {
-        this.ipsFee = ipsFee;
-    }
-
     public String getIpsDoTime() {
         return ipsDoTime;
     }
 
     public void setIpsDoTime(String ipsDoTime) {
         this.ipsDoTime = ipsDoTime == null ? null : ipsDoTime.trim();
+    }
+
+    public String getIpsAcctNo() {
+        return ipsAcctNo;
+    }
+
+    public void setIpsAcctNo(String ipsAcctNo) {
+        this.ipsAcctNo = ipsAcctNo == null ? null : ipsAcctNo.trim();
     }
 
     public Byte getStatus() {

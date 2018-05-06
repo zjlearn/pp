@@ -1,52 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.galaxy.moon.pp.dao.WithdrawBillMapper">
-    <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.bean.WithdrawBill">
+<mapper namespace="com.galaxy.moon.pp.dao.RegUserBillMapper">
+    <resultMap id="BaseResultMap" type="com.galaxy.moon.pp.model.bean.RegUserBill">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="billNo" jdbcType="VARCHAR" property="billNo"/>
         <result column="ipsBillNo" jdbcType="VARCHAR" property="ipsBillNo"/>
         <result column="userId" jdbcType="BIGINT" property="userId"/>
-        <result column="amount" jdbcType="DECIMAL" property="amount"/>
-        <result column="ipsTrdAmt" jdbcType="DECIMAL" property="ipsTrdAmt"/>
-        <result column="merFee" jdbcType="DECIMAL" property="merFee"/>
-        <result column="ipsFee" jdbcType="DECIMAL" property="ipsFee"/>
         <result column="ipsDoTime" jdbcType="VARCHAR" property="ipsDoTime"/>
+        <result column="ipsAcctNo" jdbcType="VARCHAR" property="ipsAcctNo"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="createTime" jdbcType="BIGINT" property="createTime"/>
         <result column="updateTime" jdbcType="BIGINT" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, billNo, ipsBillNo, userId, amount, ipsTrdAmt, merFee, ipsFee, ipsDoTime, status, 
-    createTime, updateTime
+    id, billNo, ipsBillNo, userId, ipsDoTime, ipsAcctNo, status, createTime, updateTime
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tb_withdraw_bill
+        from tb_regUser_bill
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="selectByBillNo" resultType="com.galaxy.moon.pp.model.bean.WithdrawBill">
-        SELECT * from tb_withdraw_bill
+    <select id="selectByBillNo" resultType="com.galaxy.moon.pp.model.bean.RegUserBill">
+        SELECT * from tb_regUser_bill
         WHERE billNo = #{billNo}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tb_withdraw_bill
+    delete from tb_regUser_bill
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.WithdrawBill">
-    insert into tb_withdraw_bill (id, billNo, ipsBillNo, 
-      userId, amount, ipsTrdAmt, 
-      merFee, ipsFee, ipsDoTime, 
+    <insert id="insert" parameterType="com.galaxy.moon.pp.model.bean.RegUserBill">
+    insert into tb_regUser_bill (id, billNo, ipsBillNo, 
+      userId, ipsDoTime, ipsAcctNo, 
       status, createTime, updateTime
       )
     values (#{id,jdbcType=BIGINT}, #{billNo,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, #{ipsTrdAmt,jdbcType=DECIMAL}, 
-      #{merFee,jdbcType=DECIMAL}, #{ipsFee,jdbcType=DECIMAL}, #{ipsDoTime,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{ipsDoTime,jdbcType=VARCHAR}, #{ipsAcctNo,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.WithdrawBill">
-        insert into tb_withdraw_bill
+    <insert id="insertSelective" parameterType="com.galaxy.moon.pp.model.bean.RegUserBill">
+        insert into tb_regUser_bill
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -60,20 +54,11 @@
             <if test="userId != null">
                 userId,
             </if>
-            <if test="amount != null">
-                amount,
-            </if>
-            <if test="ipsTrdAmt != null">
-                ipsTrdAmt,
-            </if>
-            <if test="merFee != null">
-                merFee,
-            </if>
-            <if test="ipsFee != null">
-                ipsFee,
-            </if>
             <if test="ipsDoTime != null">
                 ipsDoTime,
+            </if>
+            <if test="ipsAcctNo != null">
+                ipsAcctNo,
             </if>
             <if test="status != null">
                 status,
@@ -98,20 +83,11 @@
             <if test="userId != null">
                 #{userId,jdbcType=BIGINT},
             </if>
-            <if test="amount != null">
-                #{amount,jdbcType=DECIMAL},
-            </if>
-            <if test="ipsTrdAmt != null">
-                #{ipsTrdAmt,jdbcType=DECIMAL},
-            </if>
-            <if test="merFee != null">
-                #{merFee,jdbcType=DECIMAL},
-            </if>
-            <if test="ipsFee != null">
-                #{ipsFee,jdbcType=DECIMAL},
-            </if>
             <if test="ipsDoTime != null">
                 #{ipsDoTime,jdbcType=VARCHAR},
+            </if>
+            <if test="ipsAcctNo != null">
+                #{ipsAcctNo,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
@@ -124,8 +100,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.WithdrawBill">
-        update tb_withdraw_bill
+    <update id="updateByPrimaryKeySelective" parameterType="com.galaxy.moon.pp.model.bean.RegUserBill">
+        update tb_regUser_bill
         <set>
             <if test="billNo != null">
                 billNo = #{billNo,jdbcType=VARCHAR},
@@ -136,20 +112,11 @@
             <if test="userId != null">
                 userId = #{userId,jdbcType=BIGINT},
             </if>
-            <if test="amount != null">
-                amount = #{amount,jdbcType=DECIMAL},
-            </if>
-            <if test="ipsTrdAmt != null">
-                ipsTrdAmt = #{ipsTrdAmt,jdbcType=DECIMAL},
-            </if>
-            <if test="merFee != null">
-                merFee = #{merFee,jdbcType=DECIMAL},
-            </if>
-            <if test="ipsFee != null">
-                ipsFee = #{ipsFee,jdbcType=DECIMAL},
-            </if>
             <if test="ipsDoTime != null">
                 ipsDoTime = #{ipsDoTime,jdbcType=VARCHAR},
+            </if>
+            <if test="ipsAcctNo != null">
+                ipsAcctNo = #{ipsAcctNo,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 status = #{status,jdbcType=TINYINT},
@@ -163,16 +130,13 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.WithdrawBill">
-    update tb_withdraw_bill
+    <update id="updateByPrimaryKey" parameterType="com.galaxy.moon.pp.model.bean.RegUserBill">
+    update tb_regUser_bill
     set billNo = #{billNo,jdbcType=VARCHAR},
       ipsBillNo = #{ipsBillNo,jdbcType=VARCHAR},
       userId = #{userId,jdbcType=BIGINT},
-      amount = #{amount,jdbcType=DECIMAL},
-      ipsTrdAmt = #{ipsTrdAmt,jdbcType=DECIMAL},
-      merFee = #{merFee,jdbcType=DECIMAL},
-      ipsFee = #{ipsFee,jdbcType=DECIMAL},
       ipsDoTime = #{ipsDoTime,jdbcType=VARCHAR},
+      ipsAcctNo = #{ipsAcctNo,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       createTime = #{createTime,jdbcType=BIGINT},
       updateTime = #{updateTime,jdbcType=BIGINT}

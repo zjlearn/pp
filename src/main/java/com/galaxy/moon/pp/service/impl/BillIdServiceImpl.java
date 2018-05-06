@@ -14,7 +14,11 @@ public class BillIdServiceImpl implements BillIdService {
 
     @Override
     public String nextStrId() {
-        return String.valueOf(new Random().nextLong());
+        long id = 0L;
+        while (id < 1000) {
+            id = new Random().nextLong();
+        }
+        return String.valueOf(id);
     }
 
     @Override
