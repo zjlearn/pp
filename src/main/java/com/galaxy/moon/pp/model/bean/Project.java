@@ -26,6 +26,9 @@ public class Project {
 
     private Integer remainder;
 
+    private Integer repayType; //还款类型
+
+
     private Byte status;
 
     private Long createTime;

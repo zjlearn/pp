@@ -16,13 +16,16 @@ public class LoanBill {
     private BigDecimal expectRate; // 预期的利率
     private Integer loanType;  // 借款类型，与产品类型不同
     private Integer duration;  // 借款时长
+    private Integer assetsType;   //资产的类型
     private Long asssetId; // 资产Id
 
+    private Integer integrity; //资料的完整度
     private Long createTime;
-    private Integer status; // 待审核， 审核中， 已通过， 已拒绝
     private String loanRemark;
-    private String statusRemark;  //已拒绝时， 保存原因
 
+    //操作的业务员信息
+    private String operatorId;
+    private String operatorName;
 
     public LoanBill() {
     }
@@ -107,14 +110,6 @@ public class LoanBill {
         this.createTime = createTime;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public String getLoanRemark() {
         return loanRemark;
     }
@@ -123,19 +118,43 @@ public class LoanBill {
         this.loanRemark = loanRemark;
     }
 
-    public String getStatusRemark() {
-        return statusRemark;
-    }
-
-    public void setStatusRemark(String statusRemark) {
-        this.statusRemark = statusRemark;
-    }
-
     public String getMobile() {
         return mobile;
     }
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public Integer getAssetsType() {
+        return assetsType;
+    }
+
+    public void setAssetsType(Integer assetsType) {
+        this.assetsType = assetsType;
+    }
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
+    public Integer getIntegrity() {
+        return integrity;
+    }
+
+    public void setIntegrity(Integer integrity) {
+        this.integrity = integrity;
     }
 }
